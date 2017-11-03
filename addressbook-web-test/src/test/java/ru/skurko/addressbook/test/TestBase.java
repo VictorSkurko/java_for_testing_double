@@ -78,6 +78,14 @@ public class TestBase {
         wd.findElement(By.linkText("groups")).click();
     }
 
+    protected void submitContactForm() {
+        wd.findElement(By.name("submit")).click();
+    }
+
+    protected void initContactForm() {
+        wd.findElement(By.linkText("add new")).click();
+    }
+
     @AfterMethod
     public void tearDown() {
         wd.quit();
@@ -89,5 +97,32 @@ public class TestBase {
 
     protected void selectGroup() {
         wd.findElement(By.name("selected[]")).click();
+    }
+
+    protected void fillContactForm(String firstname, String middlename, String lastname, String nickname) {
+        wd.findElement(By.name("firstname")).click();
+        wd.findElement(By.name("firstname")).clear();
+        wd.findElement(By.name("firstname")).sendKeys(firstname);
+        wd.findElement(By.name("middlename")).click();
+        wd.findElement(By.name("middlename")).clear();
+        wd.findElement(By.name("middlename")).sendKeys(middlename);
+        wd.findElement(By.name("lastname")).click();
+        wd.findElement(By.name("lastname")).clear();
+        wd.findElement(By.name("lastname")).sendKeys(lastname);
+        wd.findElement(By.name("nickname")).click();
+        wd.findElement(By.name("nickname")).clear();
+        wd.findElement(By.name("nickname")).sendKeys(nickname);
+    }
+
+    protected void deleteContact() {
+        wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
+    }
+
+    protected void selectContact() {
+        wd.findElement(By.name("selected[]")).click();
+    }
+
+    protected void alertOk() {
+        wd.switchTo().alert().accept();
     }
 }

@@ -17,6 +17,8 @@ public class GroupCreationTest extends TestBase {
                 "HomeHeader",
                 "HomeFooter"));
 
+        app.getGroupHelper().submitGroupCreation();
+
         app.getGroupHelper().backToGroupPage();
 
         app.getSessionHelper().logout();

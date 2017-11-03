@@ -11,7 +11,7 @@ public class GroupCreationTest extends TestBase{
 
         initGroupCreation();
 
-        fillGroupForm(new GroupData("Home group", "HomeHeader", "HomeFooter"));
+        fillGroupForm(new GroupData("New group", "HomeHeader", "HomeFooter"));
 
         backToGroupPage();
 

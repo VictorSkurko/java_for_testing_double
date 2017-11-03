@@ -43,7 +43,7 @@ public class TestBase {
     }
 
     protected void backToGroupPage() {
-        new WebDriverWait(wd, 30).until(ExpectedConditions.presenceOfElementLocated(By.linkText("group page"))).click();
+//        new WebDriverWait(wd, 10).until(ExpectedConditions.presenceOfElementLocated(By.linkText("group page"))).click();
         wd.findElement(By.linkText("group page")).click();
     }
 
@@ -69,12 +69,12 @@ public class TestBase {
     }
 
     protected void initGroupCreation() {
-        new WebDriverWait(wd, 30).until(ExpectedConditions.presenceOfElementLocated(By.linkText("groups"))).click();
+//        new WebDriverWait(wd, 30).until(ExpectedConditions.presenceOfElementLocated(By.linkText("groups"))).click();
         wd.findElement(By.name("new")).click();
     }
 
     protected void goToGroupPage() {
-        new WebDriverWait(wd, 30).until(ExpectedConditions.presenceOfElementLocated(By.linkText("groups"))).click();
+//        new WebDriverWait(wd, 30).until(ExpectedConditions.presenceOfElementLocated(By.linkText("groups"))).click();
         wd.findElement(By.linkText("groups")).click();
     }
 

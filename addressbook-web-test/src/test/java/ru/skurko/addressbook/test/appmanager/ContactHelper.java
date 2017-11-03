@@ -35,4 +35,13 @@ public class ContactHelper extends HelperBase{
 
         type(By.name("nickname"), contactData.getNickname());
     }
+
+
+    public void modifyContact() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    }
+
+    public void submitModifyContact() {
+        click(By.name("update"));
+    }
 }

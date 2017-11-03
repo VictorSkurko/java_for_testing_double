@@ -1,4 +1,4 @@
-package ru.skurko.addressbook.test;
+package ru.skurko.addressbook.test.model;
 
 public class GroupData {
     private final String groupName;

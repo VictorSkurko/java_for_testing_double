@@ -11,10 +11,10 @@ public class ContactCreationTest extends TestBase {
         app.getContactHelper().initContactForm();
 
         app.getContactHelper().fillContactForm(new ContactData(
-                "Александр",
+                "Владимир",
                 "Александрович",
                 "Александров",
-                "Al"));
+                "VAAl"));
 
         app.getContactHelper().submitContactForm();
 

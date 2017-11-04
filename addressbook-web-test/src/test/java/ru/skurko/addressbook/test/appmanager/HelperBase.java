@@ -1,7 +1,9 @@
 package ru.skurko.addressbook.test.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class HelperBase {
     WebDriver wd;
@@ -16,10 +18,28 @@ public class HelperBase {
 
     protected void type(By locator, String text) {
 
-        if (text != null) {
         click(locator);
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(text);
+//        wd.findElement(locator).clear();
+//        wd.findElement(locator).sendKeys(text);
+
+        //Оставляем неизменяющиеся значения в полях
+        if (text != null) {
+
+            String existingText = wd.findElement(locator).getAttribute("value");
+
+            if (!text.equals(existingText)) {
+
+                wd.findElement(locator).clear();
+                wd.findElement(locator).sendKeys(text);
+            }
+        }
+    }
+    public static boolean isAlertPresent(FirefoxDriver wd) {
+        try {
+            wd.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
         }
     }
 }

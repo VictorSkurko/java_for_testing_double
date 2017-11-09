@@ -7,7 +7,7 @@ import ru.skurko.addressbook.test.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    protected final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+    protected final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
 
     @AfterMethod
     public void tearDown() {

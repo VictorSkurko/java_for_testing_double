@@ -12,8 +12,8 @@ public class ContactModifyTest extends TestBase {
                 "Александр XXX",
                 "Александрович XXX",
                 "Александров XXX",
-                "Al XXX",
-                null));
+                "Al",
+                null),false);
         app.getContactHelper().submitModifyContact();
 //Выход
         app.getSessionHelper().logout();

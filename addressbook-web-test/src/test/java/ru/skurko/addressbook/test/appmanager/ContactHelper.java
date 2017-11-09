@@ -5,6 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.skurko.addressbook.test.model.ContactData;
 
 public class ContactHelper extends HelperBase{
@@ -29,7 +30,7 @@ public class ContactHelper extends HelperBase{
         click(By.name("selected[]"));
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
 
         type(By.name("middlename"), contactData.getMiddlename());
@@ -38,8 +39,11 @@ public class ContactHelper extends HelperBase{
 
         type(By.name("nickname"), contactData.getNickname());
 
-        if (isElementPresent(By.name("new_group"))){
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        // если это форма создания то creation будет true и выбираем:
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
 

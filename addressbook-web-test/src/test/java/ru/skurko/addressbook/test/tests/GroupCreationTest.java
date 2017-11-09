@@ -14,7 +14,7 @@ public class GroupCreationTest extends TestBase {
 
         app.getGroupHelper().fillGroupForm(new GroupData(
 
-                "New group II",
+                "New group IV",
                 null,
                 null));
 

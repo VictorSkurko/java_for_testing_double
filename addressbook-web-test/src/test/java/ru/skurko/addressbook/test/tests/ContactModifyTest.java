@@ -12,7 +12,10 @@ public class ContactModifyTest extends TestBase {
                 "Александр XXX",
                 "Александрович XXX",
                 "Александров XXX",
-                "Al XXX"));
+                "Al XXX",
+                null));
         app.getContactHelper().submitModifyContact();
+//Выход
+        app.getSessionHelper().logout();
     }
 }

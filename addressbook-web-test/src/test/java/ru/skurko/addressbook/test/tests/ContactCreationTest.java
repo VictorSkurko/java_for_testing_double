@@ -14,7 +14,8 @@ public class ContactCreationTest extends TestBase {
                 "Владимир",
                 "Александрович",
                 "Александров",
-                "VAAl"));
+                "VAAl",
+                "New group II"));
 
         app.getContactHelper().submitContactForm();
 

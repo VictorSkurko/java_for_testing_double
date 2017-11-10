@@ -44,7 +44,7 @@ public class ApplicationManager {
 
 //        wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
       //  wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         //Далее меняем FirefoxDriver на WebDriver в Helper-ах
 

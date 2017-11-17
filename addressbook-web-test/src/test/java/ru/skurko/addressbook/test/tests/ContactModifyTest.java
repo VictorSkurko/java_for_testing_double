@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.GroupData;
 
+import java.util.List;
+
 public class ContactModifyTest extends TestBase {
 
     @Test
@@ -34,8 +36,9 @@ public class ContactModifyTest extends TestBase {
                     "NewI"), true);
         }
 
+        app.getNavigationHelper().goToContactPage();
         //Считаем количество контактов
-        int before = app.getContactHelper().getContactCount();
+        List<ContactData> before = app.getContactHelper().getContactList();
 
         //Модифицируем контакт
         app.getContactHelper().modifyContact();
@@ -46,12 +49,14 @@ public class ContactModifyTest extends TestBase {
                 "Al",
                 "NewI"), false);
         app.getContactHelper().submitModifyContact();
+        app.getNavigationHelper().goToContactPage();
 
         //Считаем колоичество контактов после модификации
-        int after = app.getContactHelper().getContactCount();
+
+        List<ContactData> after = app.getContactHelper().getContactList();
 
         //Сравниваем количество контактов до и после модификации
-        Assert.assertEquals(after, before);
+        Assert.assertEquals(after.size(), before.size());
 
 //Выход
         app.getSessionHelper().logout();

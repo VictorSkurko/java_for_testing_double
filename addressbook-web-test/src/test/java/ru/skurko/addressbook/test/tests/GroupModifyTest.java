@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.GroupData;
 
+import java.util.List;
+
 public class GroupModifyTest extends TestBase{
 
     @Test
@@ -18,9 +20,10 @@ public class GroupModifyTest extends TestBase{
                     "Modify Group",
                     null));
         }
-        int before = app.getGroupHelper().getGroupCount();
+//        int before = app.getGroupHelper().getGroupCount();
+        List<GroupData> before = app.getGroupHelper().getGroupList();
 
-        app.getGroupHelper().selectGroup(before-1);
+        app.getGroupHelper().selectGroup(before.size()-1);
         app.getGroupHelper().initGroupModify();
         app.getGroupHelper().fillGroupForm(new GroupData(
                 "NewI",
@@ -29,7 +32,9 @@ public class GroupModifyTest extends TestBase{
         app.getGroupHelper().submitGroupModify();
         app.getNavigationHelper().goToGroupPage();
 
-        int after = app.getGroupHelper().getGroupCount();
-        Assert.assertEquals(after, before);
+//        int after = app.getGroupHelper().getGroupCount();
+        List<GroupData> after = app.getGroupHelper().getGroupList();
+
+        Assert.assertEquals(after.size(), before.size());
     }
 }

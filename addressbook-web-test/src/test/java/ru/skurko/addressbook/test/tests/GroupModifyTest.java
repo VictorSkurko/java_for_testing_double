@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.GroupData;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class GroupModifyTest extends TestBase{
@@ -25,10 +26,13 @@ public class GroupModifyTest extends TestBase{
 
         app.getGroupHelper().selectGroup(before.size()-1);
         app.getGroupHelper().initGroupModify();
-        app.getGroupHelper().fillGroupForm(new GroupData(
+
+        GroupData group = new GroupData(before.get(before.size()-1).getId(),
                 "NewI",
                 "HomeHeader after Modify",
-                "HomeFooter after Modify"));
+                "HomeFooter after Modify");
+
+        app.getGroupHelper().fillGroupForm(group);
         app.getGroupHelper().submitGroupModify();
         app.getNavigationHelper().goToGroupPage();
 
@@ -36,5 +40,9 @@ public class GroupModifyTest extends TestBase{
         List<GroupData> after = app.getGroupHelper().getGroupList();
 
         Assert.assertEquals(after.size(), before.size());
+
+        before.remove(before.size()-1);
+        before.add(group);
+        Assert.assertEquals(new HashSet<Object>(before),new HashSet<Object>(after)); //Преобразуем списки во множества
     }
 }

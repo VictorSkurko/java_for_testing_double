@@ -32,11 +32,15 @@ public class GroupDeletedTest extends TestBase {
 
         Assert.assertEquals(after.size(), before.size() - 1);
 
+        //здесь before уже ссылается на старый список. в котором удален ненужный элемент
+        // после этого действия старый список содержит те же элементы что и новый
         before.remove(before.size() - 1);
-        Assert.assertEquals(before, after);
 
-        app.getSessionHelper().
+        // Теперь сравниваем списки поэлементно в цикле
 
-    logout();
-}
+            Assert.assertEquals(before, after);
+
+
+        app.getSessionHelper().logout();
+    }
 }

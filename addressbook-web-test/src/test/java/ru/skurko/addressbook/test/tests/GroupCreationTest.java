@@ -1,6 +1,5 @@
 package ru.skurko.addressbook.test.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.GroupData;
 
@@ -11,7 +10,7 @@ public class GroupCreationTest extends TestBase {
 
         app.getNavigationHelper().goToGroupPage();
 
-        int before = app.getGroupHelper().getGroupCount();
+//        app.getGroupHelper().initGroupCreation();
 
         app.getGroupHelper().createGroup(new GroupData(
 
@@ -19,9 +18,9 @@ public class GroupCreationTest extends TestBase {
                 null,
                 null));
 
-        int after = app.getGroupHelper().getGroupCount();
+//        app.getGroupHelper().submitGroupCreation();
 
-        Assert.assertEquals(after, before+1);
+//        app.getGroupHelper().backToGroupPage();
 
         app.getSessionHelper().logout();
     }

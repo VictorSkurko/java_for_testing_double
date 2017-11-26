@@ -31,8 +31,9 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     }
 
-    public void selectContact() {
-        click(By.name("selected[]"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
+//        click(By.name("selected[]"));
     }
 
     public void fillContactForm(ContactData contactData, boolean creation) {
@@ -52,8 +53,9 @@ public class ContactHelper extends HelperBase{
         }
     }
 
-    public void modifyContact() {
+    public void modifyContact(int index) {
         click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+//        wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")).get(index).click();
     }
 
     public void submitModifyContact() {
@@ -80,7 +82,8 @@ public class ContactHelper extends HelperBase{
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             String name = element.getText();
-            ContactData contact = new ContactData(name, null, null, null, "NewI");
+            String lastname = element.getText();
+            ContactData contact = new ContactData(name, null, lastname, null, "NewI");
             contacts.add(contact);
         }
         return contacts;

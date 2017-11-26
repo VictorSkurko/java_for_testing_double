@@ -42,7 +42,8 @@ public class ContactModifyTest extends TestBase {
         List<ContactData> before = app.getContactHelper().getContactList();
 
         //Модифицируем контакт
-        app.getContactHelper().modifyContact();
+//        app.getContactHelper().modifyContact();
+        app.getContactHelper().modifyContact(before.size());
         app.getContactHelper().fillContactForm(new ContactData(
                 "Александр",
                 "Александрович",

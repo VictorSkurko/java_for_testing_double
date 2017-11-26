@@ -1,8 +1,11 @@
 package ru.skurko.addressbook.test.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.GroupData;
+
+import java.util.List;
 
 public class ContactCreationTest extends TestBase {
 
@@ -21,6 +24,7 @@ public class ContactCreationTest extends TestBase {
                     null));
         }
         app.getNavigationHelper().goToContactPage();
+        List<ContactData> before = app.getContactHelper().getContactList();
 
         app.getContactHelper().createContact(new ContactData(
                 "Владимир",
@@ -28,6 +32,10 @@ public class ContactCreationTest extends TestBase {
                 "Александров",
                 "VAAl",
                 "NewI"), true);
+
+        app.getNavigationHelper().goToContactPage();
+        List<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size()+1);
 
         app.getSessionHelper().logout();
     }

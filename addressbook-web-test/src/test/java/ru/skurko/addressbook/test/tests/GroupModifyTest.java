@@ -14,16 +14,16 @@ public class GroupModifyTest extends TestBase{
         if (!app.getGroupHelper().isThereAGroup()){
             app.getGroupHelper().createGroup(new GroupData(
 
-                    "NewI",
                     "Modify Group",
+                    null,
                     null));
         }
         int before = app.getGroupHelper().getGroupCount();
 
-        app.getGroupHelper().selectGroup(before-1);
+        app.getGroupHelper().selectGroup();
         app.getGroupHelper().initGroupModify();
         app.getGroupHelper().fillGroupForm(new GroupData(
-                "NewI",
+                "Group after Modify",
                 "HomeHeader after Modify",
                 "HomeFooter after Modify"));
         app.getGroupHelper().submitGroupModify();

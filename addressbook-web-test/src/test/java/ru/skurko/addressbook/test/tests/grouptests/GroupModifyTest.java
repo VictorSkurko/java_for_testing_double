@@ -1,13 +1,14 @@
-package ru.skurko.addressbook.test.tests;
+package ru.skurko.addressbook.test.tests.grouptests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.GroupData;
+import ru.skurko.addressbook.test.tests.TestBase;
 
 import java.util.HashSet;
 import java.util.List;
 
-public class GroupModifyTest extends TestBase{
+public class GroupModifyTest extends TestBase {
 
     @Test
     public void testGroupModify(){

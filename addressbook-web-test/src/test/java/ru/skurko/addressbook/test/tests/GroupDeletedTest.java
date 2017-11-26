@@ -11,10 +11,7 @@ public class GroupDeletedTest extends TestBase {
 
         app.getNavigationHelper().goToGroupPage();
 
-
         //если не существует групп для удаления, то создаем группу
-//        int before = app.getGroupHelper().getGroupCount();
-
         if (!app.getGroupHelper().isThereAGroup()){
             app.getGroupHelper().createGroup(new GroupData(
 
@@ -25,7 +22,7 @@ public class GroupDeletedTest extends TestBase {
 
         int before = app.getGroupHelper().getGroupCount();
 
-        app.getGroupHelper().selectGroup();
+        app.getGroupHelper().selectGroup(before-1);
         app.getGroupHelper().deleteGroup();
         app.getGroupHelper().backToGroupPage();
 

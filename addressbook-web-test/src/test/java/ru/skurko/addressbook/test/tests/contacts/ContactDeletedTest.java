@@ -39,7 +39,7 @@ public class ContactDeletedTest extends TestBase {
         }
         List<ContactData> before = app.getContactHelper().getContactList();
 
-        app.getContactHelper().selectContact(before.size()-1);
+        app.getContactHelper().selectContact();
 
         app.getContactHelper().deleteContact();
 
@@ -50,14 +50,6 @@ public class ContactDeletedTest extends TestBase {
 
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size()-1);
-
-        //Выравниваем размеры списков
-        before.remove(before.size()-1);
-
-        //Проверяем совпадение элементов в цикле
-        for (int i = 0; i< after.size(); i++) {
-            Assert.assertEquals(before.get(i), after.get(i));
-        }
 
         app.getSessionHelper().logout();
     }

@@ -61,7 +61,6 @@ public class GroupHelper extends HelperBase{
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
     }
-<<<<<<< HEAD
 
     public int getGroupCount() {
         return wd.findElements(By.name("selected[]")).size();
@@ -78,6 +77,4 @@ public class GroupHelper extends HelperBase{
         }
         return groups;
     }
-=======
->>>>>>> parent of 4a8621c... Добавлены счетчики для групп
 }

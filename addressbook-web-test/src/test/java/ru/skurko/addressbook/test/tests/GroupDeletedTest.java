@@ -1,9 +1,8 @@
-package ru.skurko.addressbook.test.tests.groups;
+package ru.skurko.addressbook.test.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.GroupData;
-import ru.skurko.addressbook.test.tests.TestBase;
 
 import java.util.List;
 

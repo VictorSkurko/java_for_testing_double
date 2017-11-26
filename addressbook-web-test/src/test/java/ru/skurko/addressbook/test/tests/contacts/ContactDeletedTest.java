@@ -54,10 +54,8 @@ public class ContactDeletedTest extends TestBase {
         //Выравниваем размеры списков
         before.remove(before.size()-1);
 
-        //Проверяем совпадение элементов в цикле
-        for (int i = 0; i< after.size(); i++) {
-            Assert.assertEquals(before.get(i), after.get(i));
-        }
+        //Проверяем совпадение элементов
+        Assert.assertEquals(before, after);
 
         app.getSessionHelper().logout();
     }

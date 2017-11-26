@@ -1,11 +1,8 @@
 package ru.skurko.addressbook.test.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.GroupData;
-
-import java.util.List;
 
 public class ContactDeletedTest extends TestBase {
 
@@ -36,7 +33,6 @@ public class ContactDeletedTest extends TestBase {
                     "AAA",
                     "NewI"), true);
         }
-        List<ContactData> before = app.getContactHelper().getContactList();
 
         app.getContactHelper().selectContact();
 
@@ -44,11 +40,6 @@ public class ContactDeletedTest extends TestBase {
 
         //Обрабатываем алерт - подтверждаем удаление контакта
         app.alertOk();
-
-        app.getNavigationHelper().goToContactPage();
-
-        List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), before.size()-1);
 
         app.getSessionHelper().logout();
     }

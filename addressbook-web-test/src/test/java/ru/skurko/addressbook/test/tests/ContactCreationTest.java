@@ -20,7 +20,6 @@ public class ContactCreationTest extends TestBase {
                     null,
                     null));
         }
-        app.getNavigationHelper().goToContactPage();
 
         app.getContactHelper().createContact(new ContactData(
                 "Владимир",

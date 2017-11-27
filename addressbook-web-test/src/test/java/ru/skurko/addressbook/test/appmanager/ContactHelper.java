@@ -28,8 +28,16 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     }
 
-    public void selectContact() {
-        click(By.name("selected[]"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public void modifyContact(int index) {
+//        wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[]/td[]/a/img")).get(index).click();
+//        wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")).get(index).click();
+//        wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr/td/a/img")).get(index).click();
+//        wd.findElements(By.partialLinkText("Edit")).get(index).click();
+        wd.findElements(By.cssSelector("img[alt=\"Edit\"]")).get(index).click();
     }
 
     public void fillContactForm(ContactData contactData, boolean creation) {
@@ -49,9 +57,7 @@ public class ContactHelper extends HelperBase{
         }
     }
 
-    public void modifyContact() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
-    }
+
 
     public void submitModifyContact() {
         click(By.name("update"));
@@ -68,7 +74,6 @@ public class ContactHelper extends HelperBase{
     }
 
     public int getContactCount() {
-//        return wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")).size();
         return wd.findElements(By.name("entry")).size();
     }
 

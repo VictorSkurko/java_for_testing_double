@@ -43,11 +43,11 @@ public class ContactModifyTest extends TestBase {
         int before = app.getContactHelper().getContactCount();
 
         //Модифицируем контакт
-        app.getContactHelper().modifyContact();
+        app.getContactHelper().modifyContact(0);
         app.getContactHelper().fillContactForm(new ContactData(
-                "Alexander",
+                "Alexander-3",
                 "Александрович",
-                "Александров",
+                "Alexandrov",
                 "Al",
                 "NewI"), false);
         app.getContactHelper().submitModifyContact();

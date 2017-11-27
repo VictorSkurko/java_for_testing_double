@@ -11,7 +11,7 @@ public class ContactDeletedTest extends TestBase {
     @Test
     public void testContactDeleted() {
 
-        //Переходим на страницу групп и проверяем наличие
+        //Переходим на страницу групп и проверяем наличие групп
         app.getNavigationHelper().goToGroupPage();
 
         //Если нет группы, то создаем
@@ -39,7 +39,8 @@ public class ContactDeletedTest extends TestBase {
                     "NewI"), true);
         }
 
-        app.getContactHelper().selectContact();
+        //Выбираем элемент для удаления по индексу
+        app.getContactHelper().selectContact(before-1);
         app.getContactHelper().deleteContact();
 
         //Обрабатываем алерт - подтверждаем удаление контакта

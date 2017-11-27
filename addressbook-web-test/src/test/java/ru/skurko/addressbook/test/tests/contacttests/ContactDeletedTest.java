@@ -6,8 +6,6 @@ import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
 
-import java.util.List;
-
 public class ContactDeletedTest extends TestBase {
 
     @Test
@@ -28,6 +26,9 @@ public class ContactDeletedTest extends TestBase {
         //Идем на страницу контактов
         app.getNavigationHelper().goToContactPage();
 
+        //Проверим количество контактов до удаления
+        int before = app.getContactHelper().getContactCount();
+
         //Если контактов нет, то создаем контакт для удаления
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData(
@@ -37,10 +38,8 @@ public class ContactDeletedTest extends TestBase {
                     "AAA",
                     "NewI"), true);
         }
-        List<ContactData> before = app.getContactHelper().getContactList();
 
         app.getContactHelper().selectContact();
-
         app.getContactHelper().deleteContact();
 
         //Обрабатываем алерт - подтверждаем удаление контакта
@@ -48,8 +47,10 @@ public class ContactDeletedTest extends TestBase {
 
         app.getNavigationHelper().goToContactPage();
 
-        List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), before.size()-1);
+        //Считаем количество контактов после удаления
+        int after = app.getContactHelper().getContactCount();
+
+        Assert.assertEquals(after, before-1);
 
         app.getSessionHelper().logout();
     }

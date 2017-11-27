@@ -22,7 +22,7 @@ public class GroupModifyTest extends TestBase {
                     "Modify Group",
                     null));
         }
-//        int before = app.getGroupHelper().getGroupCount();
+
         List<GroupData> before = app.getGroupHelper().getGroupList();
 
         app.getGroupHelper().selectGroup(before.size()-1);
@@ -37,7 +37,6 @@ public class GroupModifyTest extends TestBase {
         app.getGroupHelper().submitGroupModify();
         app.getNavigationHelper().goToGroupPage();
 
-//        int after = app.getGroupHelper().getGroupCount();
         List<GroupData> after = app.getGroupHelper().getGroupList();
 
         Assert.assertEquals(after.size(), before.size());

@@ -6,6 +6,7 @@ import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTest extends TestBase {
@@ -29,14 +30,14 @@ public class ContactCreationTest extends TestBase {
 
         List<ContactData> before =app.getContactHelper().getContactList();
 
-//        int before = app.getContactHelper().getContactCount();
-
-        app.getContactHelper().createContact(new ContactData(
+        ContactData contact =  new ContactData(
                 "Владимир",
                 "Александрович",
                 "Александров",
                 "VAAl",
-                "NewI"), true);
+                "NewI");
+
+        app.getContactHelper().createContact(contact, true);
 
         app.getNavigationHelper().goToContactPage();
 
@@ -44,6 +45,20 @@ public class ContactCreationTest extends TestBase {
 //        int after = app.getContactHelper().getContactCount();
 
         Assert.assertEquals(after.size(), before.size()+1);
+
+
+        //Ищем элемент с максимальным идентификатором
+        int max = 0;
+        for (ContactData c : after) {
+            if (c.getId() > max) {
+                max = c.getId();
+            }
+        }
+        contact.setId(max);
+
+        before.add(contact);
+
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
         app.getSessionHelper().logout();
     }

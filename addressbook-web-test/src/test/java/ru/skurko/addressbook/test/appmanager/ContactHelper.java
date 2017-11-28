@@ -33,10 +33,6 @@ public class ContactHelper extends HelperBase{
     }
 
     public void modifyContact(int index) {
-//        wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[]/td[]/a/img")).get(index).click();
-//        wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")).get(index).click();
-//        wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr/td/a/img")).get(index).click();
-//        wd.findElements(By.partialLinkText("Edit")).get(index).click();
         wd.findElements(By.cssSelector("img[alt=\"Edit\"]")).get(index).click();
     }
 
@@ -77,12 +73,29 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.name("entry")).size();
     }
 
+//    public List<ContactData> getContactList() {
+//        List<ContactData> contacts = new ArrayList<ContactData>();
+//        List<WebElement> elements = wd.findElements(By.name("entry"));
+//        for (WebElement element : elements) {
+//            String name = element.getText();
+//            ContactData contact = new ContactData(name, null, lastname, null, "NewI");
+//            contacts.add(contact);
+//        }
+//        return contacts;
+//    }
+
+
+//    Здесь скопировал фрагмент у коллеги
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
+//        Здесь заменил ее строку  на свою
+//        List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
-            String name = element.getText();
-            ContactData contact = new ContactData(name, null, null, null, "NewI");
+            String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+            String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+
+            ContactData contact = new ContactData(firstname, null, lastname, null, "NewI");
             contacts.add(contact);
         }
         return contacts;

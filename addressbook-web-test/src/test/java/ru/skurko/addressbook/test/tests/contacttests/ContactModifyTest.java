@@ -6,6 +6,7 @@ import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ContactModifyTest extends TestBase {
@@ -44,12 +45,15 @@ public class ContactModifyTest extends TestBase {
 
         //Модифицируем контакт
         app.getContactHelper().modifyContact(before.size()-1);
-        app.getContactHelper().fillContactForm(new ContactData(
-                "Alexander-4",
+
+        ContactData contact = new ContactData(
+                "Alexander-modify",
                 "Al.",
                 "Alexandrov",
                 "Al",
-                "NewI"), false);
+                "NewI");
+
+        app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitModifyContact();
         app.getNavigationHelper().goToContactPage();
 
@@ -59,6 +63,11 @@ public class ContactModifyTest extends TestBase {
 
         //Сравниваем количество контактов до и после модификации
         Assert.assertEquals(after.size(), before.size());
+
+        before.remove(before.size()-1);
+        before.add(contact);
+
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
 //Выход
         app.getSessionHelper().logout();

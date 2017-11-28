@@ -39,25 +39,26 @@ public class ContactModifyTest extends TestBase {
 
         app.getNavigationHelper().goToContactPage();
 
-        //Проверим количество контактов до модификации
-        int before = app.getContactHelper().getContactCount();
+        List<ContactData> before =app.getContactHelper().getContactList();
+//        int before = app.getContactHelper().getContactCount();
 
         //Модифицируем контакт
-        app.getContactHelper().modifyContact(0);
+        app.getContactHelper().modifyContact(before.size()-1);
         app.getContactHelper().fillContactForm(new ContactData(
-                "Alexander-3",
-                "Александрович",
+                "Alexander-4",
+                "Al.",
                 "Alexandrov",
                 "Al",
                 "NewI"), false);
         app.getContactHelper().submitModifyContact();
         app.getNavigationHelper().goToContactPage();
 
+        List<ContactData> after =app.getContactHelper().getContactList();
         //Проверим количество контактов после модификации
-        int after = app.getContactHelper().getContactCount();
+//        int after = app.getContactHelper().getContactCount();
 
         //Сравниваем количество контактов до и после модификации
-        Assert.assertEquals(after, before);
+        Assert.assertEquals(after.size(), before.size());
 
 //Выход
         app.getSessionHelper().logout();

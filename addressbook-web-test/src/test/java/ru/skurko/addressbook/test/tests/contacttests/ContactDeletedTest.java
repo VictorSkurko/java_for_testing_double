@@ -30,7 +30,6 @@ public class ContactDeletedTest extends TestBase {
 
         //Проверим количество контактов до удаления
         List<ContactData> before =app.getContactHelper().getContactList();
-//        int before = app.getContactHelper().getContactCount();
 
         //Если контактов нет, то создаем контакт для удаления
         if (!app.getContactHelper().isThereAContact()) {
@@ -53,9 +52,15 @@ public class ContactDeletedTest extends TestBase {
 
         //Считаем количество контактов после удаления
         List<ContactData> after =app.getContactHelper().getContactList();
-//        int after = app.getContactHelper().getContactCount();
 
         Assert.assertEquals(after.size(), before.size()-1);
+
+        //Удаляем элемент из списка before, который мы удаляли выше
+        //для выравнивания списков
+        before.remove(before.size()-1);
+
+        //Проверяем совпадение элементов
+        Assert.assertEquals(before, after);
 
         app.getSessionHelper().logout();
     }

@@ -31,9 +31,9 @@ public class ContactCreationTest extends TestBase {
         List<ContactData> before =app.getContactHelper().getContactList();
 
         ContactData contact =  new ContactData(
-                "Владимир",
+                "Владимир-2",
                 "Александрович",
-                "Александров",
+                "Александров-2",
                 "VAAl",
                 "NewI");
 
@@ -46,18 +46,8 @@ public class ContactCreationTest extends TestBase {
 
         Assert.assertEquals(after.size(), before.size()+1);
 
-
-        //Ищем элемент с максимальным идентификатором
-        int max = 0;
-        for (ContactData c : after) {
-            if (c.getId() > max) {
-                max = c.getId();
-            }
-        }
-        contact.setId(max);
-
+        contact.setId(after.stream().max((contactData, t1) -> Integer.compare(contactData.getId(), t1.getId())).get().getId());
         before.add(contact);
-
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
         app.getSessionHelper().logout();

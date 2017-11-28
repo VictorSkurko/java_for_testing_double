@@ -68,8 +68,6 @@ public class ContactData {
         return group;
     }
 
-
-
     @Override
     public String toString() {
         return "ContactData{" +

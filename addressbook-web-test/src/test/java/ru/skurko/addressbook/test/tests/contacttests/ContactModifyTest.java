@@ -42,14 +42,11 @@ public class ContactModifyTest extends TestBase {
 
         List<ContactData> before =app.getContactHelper().getContactList();
 
-        //Определяем номер модифицируемого контакта
-//        int idx = before.size()-1;
-        int idx = 0;
-        app.getContactHelper().modifyContact(idx);
+        app.getContactHelper().modifyContact(before.size() -1);
 
         //Модифицируем контакт
         ContactData contact = new ContactData(
-                before.get(idx).getId(),
+                before.get(before.size() -1).getId(),
                 "Alexander-0",
                 "Al.",
                 "Alexandrov",

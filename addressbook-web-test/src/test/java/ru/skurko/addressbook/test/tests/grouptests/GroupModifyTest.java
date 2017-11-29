@@ -19,7 +19,7 @@ public class GroupModifyTest extends TestBase {
         if (!app.getGroupHelper().isThereAGroup()){
             app.getGroupHelper().createGroup(new GroupData(
 
-                    "NewI",
+                    "NewII",
                     "Modify Group",
                     null));
         }
@@ -30,7 +30,7 @@ public class GroupModifyTest extends TestBase {
         app.getGroupHelper().initGroupModify();
 
         GroupData group = new GroupData(before.get(before.size()-1).getId(),
-                "NewI",
+                "NewII",
                 "HomeHeader after Modify",
                 "HomeFooter after Modify");
 
@@ -48,6 +48,9 @@ public class GroupModifyTest extends TestBase {
         Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
         before.sort(byId);
         after.sort(byId);
+
+        System.out.println(before);
+        System.out.println(after);
 
         Assert.assertEquals(before,after);
     }

@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class GroupDeletedTest extends TestBase {
@@ -37,10 +38,14 @@ public class GroupDeletedTest extends TestBase {
         // после этого действия старый список содержит те же элементы что и новый
         before.remove(before.size() - 1);
 
-        // Теперь сравниваем списки поэлементно в цикле
+        Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+        before.sort(byId);
+        after.sort(byId);
 
-            Assert.assertEquals(before, after);
+        System.out.println(before);
+        System.out.println(after);
 
+        Assert.assertEquals(before,after);
 
         app.getSessionHelper().logout();
     }

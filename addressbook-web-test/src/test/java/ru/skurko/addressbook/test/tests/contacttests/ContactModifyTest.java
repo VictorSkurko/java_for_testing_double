@@ -6,6 +6,7 @@ import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -65,7 +66,16 @@ public class ContactModifyTest extends TestBase {
         before.remove(before.size()-1);
         before.add(contact);
 
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+//        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
+        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
+        before.sort(byId);
+        after.sort(byId);
+
+        System.out.println("Before modify contact:\n" + before);
+        System.out.println("After modify contact:\n" + after);
+
+        Assert.assertEquals(before,after);
 
 //Выход
         app.getSessionHelper().logout();

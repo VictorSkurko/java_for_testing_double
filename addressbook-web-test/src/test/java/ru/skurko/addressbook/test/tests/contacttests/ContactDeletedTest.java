@@ -6,6 +6,7 @@ import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ContactDeletedTest extends TestBase {
@@ -59,8 +60,14 @@ public class ContactDeletedTest extends TestBase {
         //для выравнивания списков
         before.remove(before.size()-1);
 
-        //Проверяем совпадение элементов
-        Assert.assertEquals(before, after);
+        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
+        before.sort(byId);
+        after.sort(byId);
+
+        System.out.println("Before delete contact:\n" + before);
+        System.out.println("After delete contact:\n" + after);
+
+        Assert.assertEquals(before,after);
 
         app.getSessionHelper().logout();
     }

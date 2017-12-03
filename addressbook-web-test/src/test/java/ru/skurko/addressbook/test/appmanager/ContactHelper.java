@@ -53,8 +53,6 @@ public class ContactHelper extends HelperBase{
         }
     }
 
-
-
     public void submitModifyContact() {
         click(By.name("update"));
     }
@@ -73,23 +71,8 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.name("entry")).size();
     }
 
-//    public List<ContactData> getContactList() {
-//        List<ContactData> contacts = new ArrayList<ContactData>();
-//        List<WebElement> elements = wd.findElements(By.name("entry"));
-//        for (WebElement element : elements) {
-//            String name = element.getText();
-//            ContactData contact = new ContactData(name, null, lastname, null, "NewI");
-//            contacts.add(contact);
-//        }
-//        return contacts;
-//    }
-
-
-//    Здесь скопировал фрагмент у коллеги
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
-//        Здесь заменил ее строку  на свою
-//        List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));

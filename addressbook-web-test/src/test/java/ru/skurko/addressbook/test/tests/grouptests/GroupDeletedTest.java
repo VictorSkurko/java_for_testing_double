@@ -5,9 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
-
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class GroupDeletedTest extends TestBase {
 
@@ -17,7 +15,7 @@ public class GroupDeletedTest extends TestBase {
         app.goTo().groupPage();
 
         //если не существует групп для удаления, то создаем группу
-        if (app.group().list().size() == 0){
+        if (app.group().all().size() == 0){
             app.group().create(new GroupData().withGroupName("Group for Delete"));
         }
     }
@@ -27,25 +25,17 @@ public class GroupDeletedTest extends TestBase {
 
         app.goTo().groupPage();
 
-        List<GroupData> before = app.group().list();
-        int index = before.size() - 1;
+        Set<GroupData> before = app.group().all();
 
-        app.group().delete(index);
+        GroupData deletedGroup = before.iterator().next();
 
-        List<GroupData> after = app.group().list();
+        app.group().delete(deletedGroup);
+
+        Set<GroupData> after = app.group().all();
 
         Assert.assertEquals(after.size(), before.size() - 1);
 
-        //здесь before уже ссылается на старый список. в котором удален ненужный элемент
-        // после этого действия старый список содержит те же элементы что и новый
-        before.remove(index);
-
-        Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-        before.sort(byId);
-        after.sort(byId);
-
-        System.out.println(before);
-        System.out.println(after);
+        before.remove(deletedGroup);
 
         Assert.assertEquals(before,after);
     }

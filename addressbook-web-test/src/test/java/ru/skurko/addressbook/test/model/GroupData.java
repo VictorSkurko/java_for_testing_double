@@ -1,5 +1,7 @@
 package ru.skurko.addressbook.test.model;
 
+import java.util.Objects;
+
 public class GroupData {
 
     private int id = Integer.MAX_VALUE;
@@ -59,11 +61,13 @@ public class GroupData {
 
         GroupData groupData = (GroupData) o;
 
-        return groupName != null ? groupName.equals(groupData.groupName) : groupData.groupName == null;
+        return id == groupData.id &&
+                Objects.equals(groupName, groupData.groupName);
     }
 
     @Override
     public int hashCode() {
-        return groupName != null ? groupName.hashCode() : 0;
+
+        return Objects.hash(id, groupName);
     }
 }

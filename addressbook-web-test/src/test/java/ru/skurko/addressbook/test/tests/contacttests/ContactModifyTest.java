@@ -21,13 +21,12 @@ public class ContactModifyTest extends TestBase {
         app.getContactHelper().modifyContact(index);
 
         //Модифицируем контакт
-        ContactData contact = new ContactData(
-                before.get(index).getId(),
-                "Alexander-140",
-                "Al.",
-                "Alexandrov",
-                "Al",
-                "NewI");
+        ContactData contact = new ContactData().withId(before.get(index).getId())
+                .withFirstName("Иван")
+                .withMiddleName("Иванович")
+                .withLastName("Иванов")
+                .withNickName("III")
+                .withGroup("NewI");
 
         app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitModifyContact();

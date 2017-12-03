@@ -19,11 +19,7 @@ public class ContactDeletedTest extends TestBase {
 
         //Если нет группы, то создаем
         if (!app.group().isThereAGroup()) {
-            app.group().create(new GroupData(
-
-                    "NewI",
-                    null,
-                    null));
+            app.group().create(new GroupData().withGroupName("NewI"));
         }
 
         //Идем на страницу контактов
@@ -31,12 +27,12 @@ public class ContactDeletedTest extends TestBase {
 
         //Если контактов нет, то создаем контакт для удаления
         if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData(
-                    "A",
-                    "А",
-                    "A",
-                    "AAA",
-                    "NewI"), true);
+            app.getContactHelper().createContact((new ContactData()
+                            .withFirstName("A")
+                            .withMiddleName("A")
+                            .withLastName("A")
+                            .withNickName("A")
+                            .withGroup("A")), true);
         }
     }
 

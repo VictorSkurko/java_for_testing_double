@@ -96,7 +96,14 @@ public class ContactHelper extends HelperBase{
             String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
             String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
 
-            ContactData contact = new ContactData(id, firstname, null, lastname, null, "NewI");
+            ContactData contact = new ContactData()
+                    .withId(id)
+                    .withFirstName(firstname)
+                    .withMiddleName(null)
+                    .withLastName(lastname)
+                    .withNickName(null)
+                    .withGroup("NewI");
+
             contacts.add(contact);
         }
         return contacts;

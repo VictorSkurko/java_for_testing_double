@@ -18,11 +18,7 @@ public class GroupDeletedTest extends TestBase {
 
         //если не существует групп для удаления, то создаем группу
         if (app.group().list().size() == 0){
-            app.group().create(new GroupData(
-
-                    "Group for Delete",
-                    null,
-                    null));
+            app.group().create(new GroupData().withGroupName("Group for Delete"));
         }
     }
 

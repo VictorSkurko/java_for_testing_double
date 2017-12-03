@@ -17,24 +17,20 @@ public class ContactCreationTest extends TestBase {
         app.goTo().groupPage();
 
         //Если нет группы, то создаем
-        if (!app.group().isThereAGroup()){
-            app.group().create(new GroupData(
-
-                    "NewI",
-                    null,
-                    null));
+        if (!app.group().isThereAGroup()) {
+            app.group().create(new GroupData().withGroupName("NewI"));
         }
 
         app.goTo().goToContactPage();
 
         List<ContactData> before =app.getContactHelper().getContactList();
 
-        ContactData contact =  new ContactData(
-                "Владимир-2",
-                "Александрович",
-                "Александров-2",
-                "VAAl",
-                "NewI");
+        ContactData contact =  new ContactData()
+                .withFirstName("Василий")
+                .withMiddleName("Иванович")
+                .withLastName("Чапаев")
+                .withNickName("VI")
+                .withGroup("NewI");
 
         app.getContactHelper().createContact(contact, true);
 

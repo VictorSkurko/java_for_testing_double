@@ -57,6 +57,14 @@ public class GroupHelper extends HelperBase{
         submitGroupCreation();
         backToGroupPage();
     }
+
+    public void modifyGroup(int index, GroupData group) {
+       selectGroup(index);
+       initGroupModify();
+       fillGroupForm(group);
+       submitGroupModify();
+    }
+
 //Проверяем наличие элемента - т.е. есть ли хоть одна группа для удаления
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));

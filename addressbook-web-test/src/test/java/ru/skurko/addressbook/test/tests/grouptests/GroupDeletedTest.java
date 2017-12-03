@@ -1,6 +1,7 @@
 package ru.skurko.addressbook.test.tests.grouptests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
@@ -9,6 +10,20 @@ import java.util.Comparator;
 import java.util.List;
 
 public class GroupDeletedTest extends TestBase {
+
+    @BeforeMethod
+
+    public void ensurePreconditions() {
+        app.getNavigationHelper().goToGroupPage();
+
+        if (!app.getGroupHelper().isThereAGroup()){
+            app.getGroupHelper().createGroup(new GroupData(
+
+                    "NewII",
+                    "Modify Group",
+                    null));
+        }
+    }
 
     @Test
     public void testGroupDeleted() {

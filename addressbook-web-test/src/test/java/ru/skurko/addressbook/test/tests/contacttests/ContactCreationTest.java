@@ -5,14 +5,12 @@ import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
-
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTest extends TestBase {
 
-    @Test (enabled = false)
+    @Test (enabled = true)
     public void testContactCreation() {
 
         //Переходим на страницу групп и проверяем наличие
@@ -43,11 +41,9 @@ public class ContactCreationTest extends TestBase {
         app.getNavigationHelper().goToContactPage();
 
         List<ContactData> after =app.getContactHelper().getContactList();
-//        int after = app.getContactHelper().getContactCount();
 
         Assert.assertEquals(after.size(), before.size()+1);
 
-//        contact.setId(after.stream().max((contactData, t1) -> Integer.compare(contactData.getId(), t1.getId())).get().getId());
         before.add(contact);
 
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
@@ -58,7 +54,5 @@ public class ContactCreationTest extends TestBase {
         System.out.println("After create contact:\n" + after);
 
         Assert.assertEquals(before,after);
-
-        app.getSessionHelper().logout();
     }
 }

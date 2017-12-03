@@ -1,6 +1,7 @@
 package ru.skurko.addressbook.test.tests.contacttests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.GroupData;
@@ -12,42 +13,19 @@ import java.util.List;
 
 public class ContactModifyTest extends TestBase {
 
-    @Test (enabled = false)
+
+    @Test (enabled = true)
     public void testContactModify() {
 
-        //Переходим на страницу групп и проверяем наличие
-        app.getNavigationHelper().goToGroupPage();
-
-        //Если нет группы, то создаем
-        if (!app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData(
-
-                    "NewI",
-                    null,
-                    null));
-
-        }
         app.getNavigationHelper().goToContactPage();
-
-        //Если контакта нет, то создаем контакт для модификации
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData(
-                    "A",
-                    "А",
-                    "A",
-                    "AAA",
-                    "NewI"), true);
-        }
-
-        app.getNavigationHelper().goToContactPage();
-
         List<ContactData> before =app.getContactHelper().getContactList();
+        int index = before.size() -1;
 
-        app.getContactHelper().modifyContact(before.size() -1);
+        app.getContactHelper().modifyContact(index);
 
         //Модифицируем контакт
         ContactData contact = new ContactData(
-                before.get(before.size() -1).getId(),
+                before.get(index).getId(),
                 "Alexander-140",
                 "Al.",
                 "Alexandrov",
@@ -63,10 +41,8 @@ public class ContactModifyTest extends TestBase {
         //Сравниваем количество контактов до и после модификации
         Assert.assertEquals(after.size(), before.size());
 
-        before.remove(before.size()-1);
+        before.remove(index);
         before.add(contact);
-
-//        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
         before.sort(byId);
@@ -78,6 +54,6 @@ public class ContactModifyTest extends TestBase {
         Assert.assertEquals(before,after);
 
 //Выход
-        app.getSessionHelper().logout();
+//        app.getSessionHelper().logout();
     }
 }

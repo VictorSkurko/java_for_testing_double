@@ -1,6 +1,7 @@
 package ru.skurko.addressbook.test.tests.contacttests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.GroupData;
@@ -11,9 +12,8 @@ import java.util.List;
 
 public class ContactDeletedTest extends TestBase {
 
-    @Test (enabled = false)
-    public void testContactDeleted() {
-
+    @BeforeMethod
+    public void ensurePreconditions(){
         //Переходим на страницу групп и проверяем наличие групп
         app.getNavigationHelper().goToGroupPage();
 
@@ -29,9 +29,6 @@ public class ContactDeletedTest extends TestBase {
         //Идем на страницу контактов
         app.getNavigationHelper().goToContactPage();
 
-        //Проверим количество контактов до удаления
-        List<ContactData> before =app.getContactHelper().getContactList();
-
         //Если контактов нет, то создаем контакт для удаления
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData(
@@ -41,9 +38,17 @@ public class ContactDeletedTest extends TestBase {
                     "AAA",
                     "NewI"), true);
         }
+    }
+
+    @Test (enabled = true)
+    public void testContactDeleted() {
+
+        //Проверим количество контактов до удаления
+        List<ContactData> before =app.getContactHelper().getContactList();
+        int index = before.size()-1;
 
         //Выбираем элемент для удаления по индексу
-        app.getContactHelper().selectContact(before.size()-1);
+        app.getContactHelper().selectContact(index);
         app.getContactHelper().deleteContact();
 
         //Обрабатываем алерт - подтверждаем удаление контакта
@@ -54,11 +59,11 @@ public class ContactDeletedTest extends TestBase {
         //Считаем количество контактов после удаления
         List<ContactData> after =app.getContactHelper().getContactList();
 
-        Assert.assertEquals(after.size(), before.size()-1);
+        Assert.assertEquals(after.size(), index);
 
         //Удаляем элемент из списка before, который мы удаляли выше
         //для выравнивания списков
-        before.remove(before.size()-1);
+        before.remove(index);
 
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
         before.sort(byId);
@@ -69,6 +74,6 @@ public class ContactDeletedTest extends TestBase {
 
         Assert.assertEquals(before,after);
 
-        app.getSessionHelper().logout();
+//        app.getSessionHelper().logout();
     }
 }

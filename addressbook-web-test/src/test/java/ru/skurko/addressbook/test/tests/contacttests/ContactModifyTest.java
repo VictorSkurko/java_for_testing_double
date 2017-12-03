@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ContactModifyTest extends TestBase {
 
-    @Test
+    @Test (enabled = false)
     public void testContactModify() {
 
         //Переходим на страницу групп и проверяем наличие
@@ -48,7 +48,7 @@ public class ContactModifyTest extends TestBase {
         //Модифицируем контакт
         ContactData contact = new ContactData(
                 before.get(before.size() -1).getId(),
-                "Alexander-0",
+                "Alexander-140",
                 "Al.",
                 "Alexandrov",
                 "Al",

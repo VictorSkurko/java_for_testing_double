@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ContactDeletedTest extends TestBase {
 
-    @Test
+    @Test (enabled = false)
     public void testContactDeleted() {
 
         //Переходим на страницу групп и проверяем наличие групп

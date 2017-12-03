@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ContactCreationTest extends TestBase {
 
-    @Test
+    @Test (enabled = false)
     public void testContactCreation() {
 
         //Переходим на страницу групп и проверяем наличие
@@ -58,9 +58,6 @@ public class ContactCreationTest extends TestBase {
         System.out.println("After create contact:\n" + after);
 
         Assert.assertEquals(before,after);
-
-
-//        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
         app.getSessionHelper().logout();
     }

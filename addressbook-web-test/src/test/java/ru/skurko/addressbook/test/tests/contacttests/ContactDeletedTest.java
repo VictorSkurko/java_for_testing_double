@@ -15,11 +15,11 @@ public class ContactDeletedTest extends TestBase {
     @BeforeMethod
     public void ensurePreconditions(){
         //Переходим на страницу групп и проверяем наличие групп
-        app.getNavigationHelper().goToGroupPage();
+        app.goTo().groupPage();
 
         //Если нет группы, то создаем
-        if (!app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData(
+        if (!app.group().isThereAGroup()) {
+            app.group().create(new GroupData(
 
                     "NewI",
                     null,
@@ -27,7 +27,7 @@ public class ContactDeletedTest extends TestBase {
         }
 
         //Идем на страницу контактов
-        app.getNavigationHelper().goToContactPage();
+        app.goTo().goToContactPage();
 
         //Если контактов нет, то создаем контакт для удаления
         if (!app.getContactHelper().isThereAContact()) {
@@ -54,7 +54,7 @@ public class ContactDeletedTest extends TestBase {
         //Обрабатываем алерт - подтверждаем удаление контакта
         app.alertOk();
 
-        app.getNavigationHelper().goToContactPage();
+        app.goTo().goToContactPage();
 
         //Считаем количество контактов после удаления
         List<ContactData> after =app.getContactHelper().getContactList();

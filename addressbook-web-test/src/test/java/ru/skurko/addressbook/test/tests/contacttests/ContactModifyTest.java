@@ -1,14 +1,11 @@
 package ru.skurko.addressbook.test.tests.contacttests;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.ContactData;
-import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactModifyTest extends TestBase {
@@ -17,7 +14,7 @@ public class ContactModifyTest extends TestBase {
     @Test (enabled = true)
     public void testContactModify() {
 
-        app.getNavigationHelper().goToContactPage();
+        app.goTo().goToContactPage();
         List<ContactData> before =app.getContactHelper().getContactList();
         int index = before.size() -1;
 
@@ -34,7 +31,7 @@ public class ContactModifyTest extends TestBase {
 
         app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitModifyContact();
-        app.getNavigationHelper().goToContactPage();
+        app.goTo().goToContactPage();
 
         List<ContactData> after =app.getContactHelper().getContactList();
 

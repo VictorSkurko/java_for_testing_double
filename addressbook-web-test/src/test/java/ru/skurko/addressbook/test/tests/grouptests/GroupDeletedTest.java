@@ -14,13 +14,14 @@ public class GroupDeletedTest extends TestBase {
     @BeforeMethod
 
     public void ensurePreconditions() {
-        app.getNavigationHelper().goToGroupPage();
+        app.goTo().groupPage();
 
-        if (!app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupData(
+        //если не существует групп для удаления, то создаем группу
+        if (app.group().list().size() == 0){
+            app.group().create(new GroupData(
 
-                    "NewII",
-                    "Modify Group",
+                    "Group for Delete",
+                    null,
                     null));
         }
     }
@@ -28,30 +29,20 @@ public class GroupDeletedTest extends TestBase {
     @Test
     public void testGroupDeleted() {
 
-        app.getNavigationHelper().goToGroupPage();
+        app.goTo().groupPage();
 
-        //если не существует групп для удаления, то создаем группу
-        if (!app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData(
+        List<GroupData> before = app.group().list();
+        int index = before.size() - 1;
 
-                    "Group for Delete",
-                    null,
-                    null));
-        }
+        app.group().delete(index);
 
-        List<GroupData> before = app.getGroupHelper().getGroupList();
-
-        app.getGroupHelper().selectGroup(before.size() - 1);
-        app.getGroupHelper().deleteGroup();
-        app.getGroupHelper().backToGroupPage();
-
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        List<GroupData> after = app.group().list();
 
         Assert.assertEquals(after.size(), before.size() - 1);
 
         //здесь before уже ссылается на старый список. в котором удален ненужный элемент
         // после этого действия старый список содержит те же элементы что и новый
-        before.remove(before.size() - 1);
+        before.remove(index);
 
         Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
         before.sort(byId);
@@ -61,7 +52,5 @@ public class GroupDeletedTest extends TestBase {
         System.out.println(after);
 
         Assert.assertEquals(before,after);
-
-//        app.getSessionHelper().logout();
     }
 }

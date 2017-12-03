@@ -7,7 +7,6 @@ import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupModifyTest extends TestBase {
@@ -15,10 +14,10 @@ public class GroupModifyTest extends TestBase {
     @BeforeMethod
 
     public void ensurePreconditions() {
-        app.getNavigationHelper().goToGroupPage();
+        app.goTo().groupPage();
 
-        if (!app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupData(
+        if (app.group().list().size() == 0){
+            app.group().create(new GroupData(
 
                     "NewII",
                     "Modify Group",
@@ -29,8 +28,7 @@ public class GroupModifyTest extends TestBase {
     @Test
     public void testGroupModify(){
 
-
-        List<GroupData> before = app.getGroupHelper().getGroupList();
+        List<GroupData> before = app.group().list();
         int index = before.size()-1;
 
 
@@ -39,10 +37,10 @@ public class GroupModifyTest extends TestBase {
                 "HomeHeader after Modify",
                 "HomeFooter after Modify");
 
-        app.getGroupHelper().modifyGroup(index, group);
-        app.getNavigationHelper().goToGroupPage();
+        app.group().modify(index, group);
+        app.goTo().groupPage();
 
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        List<GroupData> after = app.group().list();
 
         Assert.assertEquals(after.size(), before.size());
 

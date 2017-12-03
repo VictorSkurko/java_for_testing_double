@@ -14,18 +14,18 @@ public class ContactCreationTest extends TestBase {
     public void testContactCreation() {
 
         //Переходим на страницу групп и проверяем наличие
-        app.getNavigationHelper().goToGroupPage();
+        app.goTo().groupPage();
 
         //Если нет группы, то создаем
-        if (!app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupData(
+        if (!app.group().isThereAGroup()){
+            app.group().create(new GroupData(
 
                     "NewI",
                     null,
                     null));
         }
 
-        app.getNavigationHelper().goToContactPage();
+        app.goTo().goToContactPage();
 
         List<ContactData> before =app.getContactHelper().getContactList();
 
@@ -38,7 +38,7 @@ public class ContactCreationTest extends TestBase {
 
         app.getContactHelper().createContact(contact, true);
 
-        app.getNavigationHelper().goToContactPage();
+        app.goTo().goToContactPage();
 
         List<ContactData> after =app.getContactHelper().getContactList();
 

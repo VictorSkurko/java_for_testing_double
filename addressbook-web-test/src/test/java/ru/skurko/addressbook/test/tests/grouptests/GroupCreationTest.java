@@ -39,6 +39,6 @@ public class GroupCreationTest extends TestBase {
         System.out.println(before);
         System.out.println(after);
 
-        app.getSessionHelper().logout();
+//        app.getSessionHelper().logout();
     }
 }

@@ -6,9 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.skurko.addressbook.test.model.ContactData;
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase{
 
@@ -32,12 +33,22 @@ public class ContactHelper extends HelperBase{
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
-    public void initContact(int index) {
-        wd.findElements(By.cssSelector("img[alt=\"Edit\"]")).get(index).click();
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value = '" + id + "']")).click();
+
     }
 
-    public void modify(int index, ContactData contact) {
-        initContact(index);
+    public void initContactEditbyId(int id) {
+         wd.findElement(By.xpath("//a[contains(@href,'edit.php?id=" + id + "')]")).click();
+     }
+
+
+//    public void initContact(int index) {
+//        wd.findElements(By.cssSelector("img[alt=\"Edit\"]")).get(index).click();
+//    }
+
+    public void modify(ContactData contact) {
+        initContactEditbyId(contact.getId());
         fillContactForm(contact, false);
         submitModifyContact();
     }
@@ -69,9 +80,10 @@ public class ContactHelper extends HelperBase{
         submitContactForm();
     }
 
-    public void delete(int index) {
-        selectContact(index);
+    public void delete(ContactData group) {
+        selectContactById(group.getId());
         deleteContact();
+
     }
 
     public boolean isThereAContact() {
@@ -102,4 +114,26 @@ public class ContactHelper extends HelperBase{
         }
         return contacts;
     }
+
+    public Set<ContactData> all() {
+        Set<ContactData> contacts = new HashSet<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements) {
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+            String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+
+            ContactData contact = new ContactData()
+                    .withId(id)
+                    .withFirstName(firstname)
+                    .withMiddleName(null)
+                    .withLastName(lastname)
+                    .withNickName(null)
+                    .withGroup("NewI");
+
+            contacts.add(contact);
+        }
+        return contacts;
+    }
+
 }

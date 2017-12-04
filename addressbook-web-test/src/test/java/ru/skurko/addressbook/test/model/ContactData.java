@@ -1,5 +1,7 @@
 package ru.skurko.addressbook.test.model;
 
+import java.util.Objects;
+
 public class ContactData {
     private int id = Integer.MAX_VALUE;
     private String firstname;
@@ -65,17 +67,15 @@ public class ContactData {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         ContactData that = (ContactData) o;
-
-        if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-        return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+        return id == that.id &&
+                Objects.equals(firstname, that.firstname) &&
+                Objects.equals(lastname, that.lastname);
     }
 
     @Override
     public int hashCode() {
-        int result = firstname != null ? firstname.hashCode() : 0;
-        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-        return result;
+
+        return Objects.hash(id, firstname, lastname);
     }
 }

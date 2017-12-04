@@ -7,6 +7,7 @@ import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.tests.TestBase;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactModifyTest extends TestBase {
 
@@ -25,24 +26,23 @@ public class ContactModifyTest extends TestBase {
 
     @Test (enabled = true)
     public void testContactModify() {
-        List<ContactData> before =app.contact().list();
-        int index = before.size() -1;
-        ContactData contact = new ContactData().withId(before.get(index).getId())
+        Set<ContactData> before =app.contact().all();
+        ContactData modifyContact = before.iterator().next();
+
+        ContactData contact = new ContactData().withId(modifyContact.getId())
                 .withFirstName("Иван")
                 .withMiddleName("Иванович")
                 .withLastName("Иванов")
                 .withNickName("III")
                 .withGroup("NewI");
-        app.contact().modify(index, contact);
+        app.contact().modify(contact);
         app.goTo().contactPage();
-        List<ContactData> after =app.contact().list();
-        //Сравниваем количество контактов до и после модификации
+        Set<ContactData> after =app.contact().all();
+
         Assert.assertEquals(after.size(), before.size());
-        before.remove(index);
+        before.remove(modifyContact);
         before.add(contact);
-        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-        before.sort(byId);
-        after.sort(byId);
+
         Assert.assertEquals(before,after);
     }
 }

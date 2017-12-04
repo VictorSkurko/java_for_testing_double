@@ -12,9 +12,9 @@ public class ContactModifyTest extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.goTo().goToContactPage();
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact((new ContactData()
+        app.goTo().contactPage();
+        if (app.contact().list().size() == 0) {
+            app.contact().create((new ContactData()
                     .withFirstName("A")
                     .withMiddleName("A")
                     .withLastName("A")
@@ -25,7 +25,7 @@ public class ContactModifyTest extends TestBase {
 
     @Test (enabled = true)
     public void testContactModify() {
-        List<ContactData> before =app.getContactHelper().getContactList();
+        List<ContactData> before =app.contact().list();
         int index = before.size() -1;
         ContactData contact = new ContactData().withId(before.get(index).getId())
                 .withFirstName("Иван")
@@ -33,9 +33,9 @@ public class ContactModifyTest extends TestBase {
                 .withLastName("Иванов")
                 .withNickName("III")
                 .withGroup("NewI");
-        app.getContactHelper().modifyContact(index, contact);
-        app.goTo().goToContactPage();
-        List<ContactData> after =app.getContactHelper().getContactList();
+        app.contact().modify(index, contact);
+        app.goTo().contactPage();
+        List<ContactData> after =app.contact().list();
         //Сравниваем количество контактов до и после модификации
         Assert.assertEquals(after.size(), before.size());
         before.remove(index);

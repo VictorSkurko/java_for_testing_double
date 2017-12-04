@@ -20,21 +20,21 @@ public class ContactCreationTest extends TestBase {
         if (!app.group().isThereAGroup()) {
             app.group().create(new GroupData().withGroupName("NewI"));
         }
-        app.goTo().goToContactPage();
+        app.goTo().contactPage();
     }
 
     @Test (enabled = true)
     public void testContactCreation() {
-        List<ContactData> before =app.getContactHelper().getContactList();
+        List<ContactData> before =app.contact().list();
         ContactData contact =  new ContactData()
                 .withFirstName("Василий")
                 .withMiddleName("Иванович")
                 .withLastName("Чапаев")
                 .withNickName("VI")
                 .withGroup("NewI");
-        app.getContactHelper().createContact(contact, true);
-        app.goTo().goToContactPage();
-        List<ContactData> after =app.getContactHelper().getContactList();
+        app.contact().create(contact, true);
+        app.goTo().contactPage();
+        List<ContactData> after =app.contact().list();
         Assert.assertEquals(after.size(), before.size()+1);
         before.add(contact);
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());

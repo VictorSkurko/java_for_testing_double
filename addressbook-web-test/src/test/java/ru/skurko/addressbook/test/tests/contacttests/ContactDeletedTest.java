@@ -23,11 +23,11 @@ public class ContactDeletedTest extends TestBase {
         }
 
         //Идем на страницу контактов
-        app.goTo().goToContactPage();
+        app.goTo().contactPage();
 
         //Если контактов нет, то создаем контакт для удаления
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact((new ContactData()
+        if (app.contact().list().size() ==0) {
+            app.contact().create((new ContactData()
                             .withFirstName("A")
                             .withMiddleName("A")
                             .withLastName("A")
@@ -38,16 +38,13 @@ public class ContactDeletedTest extends TestBase {
 
     @Test (enabled = true)
     public void testContactDeleted() {
-        //Проверим количество контактов до удаления
-        List<ContactData> before =app.getContactHelper().getContactList();
+        List<ContactData> before =app.contact().list();
         int index = before.size()-1;
-        //Выбираем элемент для удаления по индексу
-        app.getContactHelper().selectContact(index);
-        app.getContactHelper().deleteContact();
+        app.contact().delete(index);
         app.alertOk();
-        app.goTo().goToContactPage();
-        List<ContactData> after =app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), index);
+        app.goTo().contactPage();
+        List<ContactData> after =app.contact().list();
+        Assert.assertEquals(after.size(), before.size()-1);
         before.remove(index);
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
         before.sort(byId);

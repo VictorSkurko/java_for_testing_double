@@ -1,10 +1,12 @@
 package ru.skurko.addressbook.test.tests.grouptests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.GroupData;
+import ru.skurko.addressbook.test.model.Groups;
 import ru.skurko.addressbook.test.tests.TestBase;
-import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTest extends TestBase {
 
@@ -12,19 +14,18 @@ public class GroupCreationTest extends TestBase {
     public void testGroupCreation() {
 
         app.goTo().groupPage();
-        Set<GroupData> before = app.group().all();
+        Groups before = app.group().all();
 
         GroupData group = new GroupData().withGroupName("TestIII");
 
         app.group().create(group);
 
-        Set<GroupData> after = app.group().all();
+        Groups after = app.group().all();
 
-        Assert.assertEquals(after.size(), before.size()+1);
+        assertThat(after.size(), equalTo(before.size()+1));
 
-        group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt());
-        before.add(group);
-
-        Assert.assertEquals(before, after);
+        //Используем Hamcrest
+        assertThat(after, equalTo(before.withAdded(
+                group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
     }
 }

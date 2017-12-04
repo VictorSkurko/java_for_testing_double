@@ -32,8 +32,14 @@ public class ContactHelper extends HelperBase{
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
-    public void modifyContact(int index) {
+    public void initContact(int index) {
         wd.findElements(By.cssSelector("img[alt=\"Edit\"]")).get(index).click();
+    }
+
+    public void modifyContact(int index, ContactData contact) {
+        initContact(index);
+        fillContactForm(contact, false);
+        submitModifyContact();
     }
 
     public void fillContactForm(ContactData contactData, boolean creation) {

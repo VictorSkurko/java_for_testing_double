@@ -38,38 +38,20 @@ public class ContactDeletedTest extends TestBase {
 
     @Test (enabled = true)
     public void testContactDeleted() {
-
         //Проверим количество контактов до удаления
         List<ContactData> before =app.getContactHelper().getContactList();
         int index = before.size()-1;
-
         //Выбираем элемент для удаления по индексу
         app.getContactHelper().selectContact(index);
         app.getContactHelper().deleteContact();
-
-        //Обрабатываем алерт - подтверждаем удаление контакта
         app.alertOk();
-
         app.goTo().goToContactPage();
-
-        //Считаем количество контактов после удаления
         List<ContactData> after =app.getContactHelper().getContactList();
-
         Assert.assertEquals(after.size(), index);
-
-        //Удаляем элемент из списка before, который мы удаляли выше
-        //для выравнивания списков
         before.remove(index);
-
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
         before.sort(byId);
         after.sort(byId);
-
-        System.out.println("Before delete contact:\n" + before);
-        System.out.println("After delete contact:\n" + after);
-
         Assert.assertEquals(before,after);
-
-//        app.getSessionHelper().logout();
     }
 }

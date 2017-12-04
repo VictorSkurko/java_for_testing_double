@@ -14,7 +14,7 @@ public class ContactModifyTest extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().contactPage();
-        if (app.contact().list().size() == 0) {
+        if (app.contact().all().size() == 0) {
             app.contact().create((new ContactData()
                     .withFirstName("A")
                     .withMiddleName("A")

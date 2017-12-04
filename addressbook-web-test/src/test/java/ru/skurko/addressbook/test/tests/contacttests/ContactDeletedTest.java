@@ -27,7 +27,7 @@ public class ContactDeletedTest extends TestBase {
         app.goTo().contactPage();
 
         //Если контактов нет, то создаем контакт для удаления
-        if (app.contact().list().size() ==0) {
+        if (app.contact().all().size() ==0) {
             app.contact().create((new ContactData()
                             .withFirstName("A")
                             .withMiddleName("A")

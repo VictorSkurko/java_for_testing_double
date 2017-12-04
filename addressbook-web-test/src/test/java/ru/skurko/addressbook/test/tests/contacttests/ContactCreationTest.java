@@ -1,12 +1,15 @@
 package ru.skurko.addressbook.test.tests.contacttests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.ContactData;
+import ru.skurko.addressbook.test.model.Contacts;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
-import java.util.Set;
+
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTest extends TestBase {
 
@@ -24,7 +27,7 @@ public class ContactCreationTest extends TestBase {
 
     @Test (enabled = true)
     public void testContactCreation() {
-        Set<ContactData> before =app.contact().all();
+        Contacts before =app.contact().all();
         ContactData contact =  new ContactData()
                 .withFirstName("Василий")
                 .withMiddleName("Иванович")
@@ -33,11 +36,10 @@ public class ContactCreationTest extends TestBase {
                 .withGroup("NewI");
         app.contact().create(contact, true);
         app.goTo().contactPage();
-        Set<ContactData> after =app.contact().all();
-        Assert.assertEquals(after.size(), before.size()+1);
+        Contacts after =app.contact().all();
+        assertThat(after.size(), equalTo(before.size()+1));
 
-        contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
-        before.add(contact);
-        Assert.assertEquals(before,after);
+        assertThat(after, equalTo(before.withAdded(
+                contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 }

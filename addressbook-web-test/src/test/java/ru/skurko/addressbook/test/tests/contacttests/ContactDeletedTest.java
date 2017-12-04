@@ -4,12 +4,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.ContactData;
+import ru.skurko.addressbook.test.model.Contacts;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactDeletedTest extends TestBase {
 
@@ -39,18 +39,16 @@ public class ContactDeletedTest extends TestBase {
 
     @Test (enabled = true)
     public void testContactDeleted() {
-        Set<ContactData> before =app.contact().all();
+        Contacts before =app.contact().all();
 
         ContactData deletedContact = before.iterator().next();
 
         app.contact().delete(deletedContact);
         app.alertOk();
         app.goTo().contactPage();
-        Set<ContactData> after =app.contact().all();
+        Contacts after =app.contact().all();
         Assert.assertEquals(after.size(), before.size()-1);
 
-        before.remove(deletedContact);
-
-        Assert.assertEquals(before,after);
+        assertThat(after, equalTo(before.withOut(deletedContact)));
     }
 }

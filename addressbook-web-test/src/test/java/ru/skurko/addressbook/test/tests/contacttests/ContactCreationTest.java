@@ -33,7 +33,11 @@ public class ContactCreationTest extends TestBase {
                 .withMiddleName("Иванович")
                 .withLastName("Чапаев")
                 .withNickName("VI")
-                .withGroup("NewI");
+                .withGroup("NewI")
+                .withHomePhone("+8 8635 25 00 00")
+                .withMobilePhone("+7 900 777 7777")
+                .withWorkPhone("+8 800 666 6666");
+
         app.contact().create(contact, true);
         app.goTo().contactPage();
 

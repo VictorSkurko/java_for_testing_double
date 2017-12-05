@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GroupHelper extends HelperBase{
+public class GroupHelper extends HelperBase {
 
     public GroupHelper(WebDriver wd) {
         super(wd);
@@ -55,23 +55,29 @@ public class GroupHelper extends HelperBase{
         initGroupCreation();
         fillGroupForm(group);
         submitGroupCreation();
+        //Когда группа меняется - сбрасываем кэш
+        groupCache = null;
         backToGroupPage();
     }
 
     public void modify(GroupData group) {
-       selectGroupById(group.getId());
-       initGroupModify();
-       fillGroupForm(group);
-       submitGroupModify();
+        selectGroupById(group.getId());
+        initGroupModify();
+        fillGroupForm(group);
+        submitGroupModify();
+        //Когда группа меняется - сбрасываем кэш
+        groupCache = null;
     }
 
     public void delete(GroupData group) {
         selectGroupById(group.getId());
         deleteGroup();
+        //Когда группа меняется - сбрасываем кэш
+        groupCache = null;
         backToGroupPage();
     }
 
-//Проверяем наличие элемента - т.е. есть ли хоть одна группа для удаления
+    //Проверяем наличие элемента - т.е. есть ли хоть одна группа для удаления
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
     }
@@ -80,17 +86,29 @@ public class GroupHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public Groups all() {
+    //Переменная для хранения кэша. Для оптимизации скорости тестов
+    //Иначе нам придется создавать кэш по три раза для одного теста
+    //Для одного теста это не очень заметно,
+    //но если тестов много, то обращение к копии кэша сделает их
+    //значительно быстрее.
+    private Groups groupCache = null;
 
-        Groups groups = new Groups();
+    public Groups all() {
+        //Если кэш не пустой, то возвращаем его копию.
+        if (groupCache != null) {
+            return new Groups(groupCache);
+        }
+        //Иначе создаем кэш
+        groupCache = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
 
-            groups.add(new GroupData().withId(id).withGroupName(name));
+            groupCache.add(new GroupData().withId(id).withGroupName(name));
         }
-        return groups;
+        // и возвращаем копию кэша
+        return new Groups(groupCache);
     }
 
 }

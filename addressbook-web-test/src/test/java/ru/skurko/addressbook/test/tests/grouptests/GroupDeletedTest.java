@@ -34,7 +34,6 @@ public class GroupDeletedTest extends TestBase {
         Groups before = app.group().all();
 
         GroupData deletedGroup = before.iterator().next();
-
         app.group().delete(deletedGroup);
 
         Groups after = app.group().all();

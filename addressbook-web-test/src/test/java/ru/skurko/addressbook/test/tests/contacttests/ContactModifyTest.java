@@ -38,6 +38,10 @@ public class ContactModifyTest extends TestBase {
                 .withGroup("NewI");
         app.contact().modify(contact);
         app.goTo().contactPage();
+
+        //Хэширование. Предпроверка размеров списков
+        assertThat(app.contact().count(), equalTo(before.size()));
+
         Contacts after =app.contact().all();
         Assert.assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.withOut(modifyContact).withAdded(contact)));

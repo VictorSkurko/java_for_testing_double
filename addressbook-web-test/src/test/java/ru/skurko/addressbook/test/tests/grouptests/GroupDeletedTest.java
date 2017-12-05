@@ -30,16 +30,15 @@ public class GroupDeletedTest extends TestBase {
     public void testGroupDeleted() {
 
         app.goTo().groupPage();
-
         Groups before = app.group().all();
-
         GroupData deletedGroup = before.iterator().next();
         app.group().delete(deletedGroup);
 
+        //Хеширование. Предпроверка. если тест завершается не успешно
+        //то тест падает гораздо быстрее.
+        assertThat(app.group().count(), equalTo(before.size()-1));
+
         Groups after = app.group().all();
-
-        Assert.assertEquals(after.size(), before.size() - 1);
-
         assertThat(after, equalTo(before.withOut(deletedGroup)));
     }
 }

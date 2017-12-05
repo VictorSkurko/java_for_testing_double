@@ -20,12 +20,33 @@ public class GroupCreationTest extends TestBase {
 
         app.group().create(group);
 
-        Groups after = app.group().all();
+        //Хеширование. Предпроверка. если тест завершается не успешно
+        //то тест падает гораздо быстрее.
+        assertThat(app.group().count(), equalTo(before.size()+1));
 
-        assertThat(after.size(), equalTo(before.size()+1));
+        Groups after = app.group().all();
 
         //Используем Hamcrest
         assertThat(after, equalTo(before.withAdded(
                 group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
+    }
+
+    @Test
+    //Негативный тест на проверку апострофа ("Test'") в названии группы
+    public void testBadGroupCreation() {
+
+        app.goTo().groupPage();
+        Groups before = app.group().all();
+        GroupData group = new GroupData().withGroupName("Test'");
+        app.group().create(group);
+
+        //Хеширование. Предпроверка. если тест завершается не успешно
+        //то тест падает гораздо быстрее.
+        assertThat(app.group().count(), equalTo(before.size()));
+
+
+        Groups after = app.group().all();
+        //Используем Hamcrest
+        assertThat(after, equalTo(before));
     }
 }

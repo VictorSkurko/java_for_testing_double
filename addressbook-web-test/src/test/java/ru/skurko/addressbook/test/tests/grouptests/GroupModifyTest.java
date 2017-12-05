@@ -40,10 +40,11 @@ public class GroupModifyTest extends TestBase {
         app.group().modify(group);
         app.goTo().groupPage();
 
+        //Хеширование. Предпроверка. если тест завершается не успешно
+        //то тест падает гораздо быстрее.
+        assertThat(app.group().count(), equalTo(before.size()));
+
         Groups after = app.group().all();
-
-        Assert.assertEquals(after.size(), before.size());
-
         assertThat(after, equalTo(before.withOut(modifyGroup).withAdded(group)));
     }
 }

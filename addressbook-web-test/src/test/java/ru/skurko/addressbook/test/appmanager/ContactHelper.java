@@ -7,8 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.Contacts;
-import java.util.List;
 
+import java.util.List;
 
 public class ContactHelper extends HelperBase{
 
@@ -46,11 +46,6 @@ public class ContactHelper extends HelperBase{
 //        wd.findElements(By.cssSelector("img[alt=\"Edit\"]")).get(index).click();
 //    }
 
-    public void modify(ContactData contact) {
-        initContactEditbyId(contact.getId());
-        fillContactForm(contact, false);
-        submitModifyContact();
-    }
 
     public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
@@ -65,6 +60,13 @@ public class ContactHelper extends HelperBase{
         }
     }
 
+    public void modify(ContactData contact) {
+        initContactEditbyId(contact.getId());
+        fillContactForm(contact, false);
+        submitModifyContact();
+        contactCache = null;
+    }
+
     public void submitModifyContact() {
         click(By.name("update"));
     }
@@ -73,11 +75,13 @@ public class ContactHelper extends HelperBase{
         initContactForm();
         fillContactForm((contact), true);
         submitContactForm();
+        contactCache = null;
     }
 
     public void delete(ContactData group) {
         selectContactById(group.getId());
         deleteContact();
+        contactCache = null;
 
     }
 
@@ -89,8 +93,17 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.name("entry")).size();
     }
 
+    private Contacts contactCache = null;
+
+
+    //Описание в GroupHelper
     public Contacts all() {
-        Contacts contacts = new Contacts();
+
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
@@ -105,8 +118,8 @@ public class ContactHelper extends HelperBase{
                     .withNickName(null)
                     .withGroup("NewI");
 
-            contacts.add(contact);
+            contactCache.add(contact);
         }
-        return contacts;
+        return contactCache;
     }
 }

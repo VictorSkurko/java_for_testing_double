@@ -5,10 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.model.Groups;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -25,7 +22,6 @@ public class GroupHelper extends HelperBase {
         type(By.name("group_header"), groupData.getGroupHeader());
         type(By.name("group_footer"), groupData.getGroupFooter());
     }
-//        submitGroupCreation();
 
     public void submitGroupCreation() {
         click(By.name("submit"));

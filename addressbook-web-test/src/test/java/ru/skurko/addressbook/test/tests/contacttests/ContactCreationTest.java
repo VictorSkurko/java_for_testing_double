@@ -37,7 +37,7 @@ public class ContactCreationTest extends TestBase {
                 .withGroup("NewI")
                 .withHomePhone("+8 8635 25 00 00")
                 .withMobilePhone("+7 900 777 7777")
-                .withWorkPhone("+8 800666 6666")
+                .withWorkPhone("+8 800 666 6666")
                 .withEmail("work@mail.ru")
                 .withEmail2("all@mail.com")
                 .withEmail3("other@mail.ru");

@@ -25,7 +25,7 @@ public class ContactPhoneTest extends TestBase {
     private String mergePhones(ContactData contact){
         //Создаем список из номеров
         return Arrays.asList(contact.getHomePhone(),contact.getMobilePhone(), contact.getWorkPhone())
-                //Здесь список переводим в поток и выпендриваемся с лямбдой
+                //Здесь список переводим в поток и работаем с лямбдой
                 //фильтруем из потока пустые строки.
                 //т.е. например, нет мобильного телефона
                 .stream().filter((s) -> ! s.equals(""))

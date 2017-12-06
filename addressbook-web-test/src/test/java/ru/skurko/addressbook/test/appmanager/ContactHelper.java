@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver wd) {
         super(wd);
@@ -36,8 +36,8 @@ public class ContactHelper extends HelperBase{
     }
 
     public void initContactEditbyId(int id) {
-         wd.findElement(By.xpath("//a[contains(@href,'edit.php?id=" + id + "')]")).click();
-     }
+        wd.findElement(By.xpath("//a[contains(@href,'edit.php?id=" + id + "')]")).click();
+    }
 
 //     public void initContactEditbyId(int id) {
 //         wd.findElement(By.cssSelector(String.format("a[href=edit.php?id='%s']", id))).click();
@@ -61,7 +61,6 @@ public class ContactHelper extends HelperBase{
         type(By.name("email"), contactData.getEmail());
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("email3"), contactData.getEmail3());
-
 
 
         // если это форма создания то creation будет true и выбираем:
@@ -107,34 +106,6 @@ public class ContactHelper extends HelperBase{
 
     private Contacts contactCache = null;
 
-
-//    public Contacts all() {
-//
-//        if (contactCache != null) {
-//            return new Contacts(contactCache);
-//        }
-//        contactCache = new Contacts();
-//
-//        List<WebElement> elements = wd.findElements(By.name("entry"));
-//        for (WebElement element : elements) {
-//            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-//            String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
-//            String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-//
-//
-//            ContactData contact = new ContactData()
-//                    .withId(id)
-//                    .withFirstName(firstname)
-//                    .withMiddleName(null)
-//                    .withLastName(lastname)
-//                    .withNickName(null)
-//                    .withGroup("NewI");
-//
-//            contactCache.add(contact);
-//        }
-//        return contactCache;
-//    }
-
     public Contacts all() {
 
         Contacts contacts = new Contacts();
@@ -146,7 +117,7 @@ public class ContactHelper extends HelperBase{
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
             String lastname = cells.get(1).getText();
             String firstname = cells.get(2).getText();
-            String allPhones= cells.get(5).getText();
+            String allPhones = cells.get(5).getText();
 
             contacts.add(new ContactData()
                     .withId(id)

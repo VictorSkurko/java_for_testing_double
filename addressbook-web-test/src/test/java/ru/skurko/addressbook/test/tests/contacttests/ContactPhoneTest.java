@@ -3,10 +3,8 @@ package ru.skurko.addressbook.test.tests.contacttests;
 import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.tests.TestBase;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.*;
 
@@ -35,7 +33,6 @@ public class ContactPhoneTest extends TestBase {
         //...и возвращаем метод
     }
 
-
     //Пишем очистку телефонных номеров от ненужных символов
     //шаблон, заменяющий первый параметр на второй параметр
 
@@ -43,3 +40,5 @@ public class ContactPhoneTest extends TestBase {
         return phone.replaceAll("\\s", "").replaceAll("[-()]","");
     }
 }
+//Аналогично делаем класы для сравнения адресов и электронных
+// почт на главной странице и странице редактирования

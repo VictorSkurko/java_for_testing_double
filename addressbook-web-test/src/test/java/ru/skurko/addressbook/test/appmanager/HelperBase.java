@@ -6,6 +6,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.io.File;
+
 public class HelperBase {
     WebDriver wd;
 
@@ -29,6 +31,14 @@ public class HelperBase {
             }
         }
     }
+
+    protected void attach(By locator, File file) {
+        if (file != null) {
+                wd.findElement(locator).sendKeys(file.getAbsolutePath());
+            }
+        }
+
+
     public static boolean isAlertPresent(WebDriver wd) { //Здесь FirefoxDriver? У нас уже везде WebDriver
         try { //Пытаемся найти окно алерта
             wd.switchTo().alert();

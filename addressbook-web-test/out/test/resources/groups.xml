@@ -1,0 +1,14 @@
+<list>
+  <group>
+    <groupName>groupName 0</groupName>
+    <groupHeader>groupHeader 0</groupHeader>
+  </group>
+  <group>
+    <groupName>groupName 1</groupName>
+    <groupHeader>groupHeader 1</groupHeader>
+  </group>
+  <group>
+    <groupName>groupName 2</groupName>
+    <groupHeader>groupHeader 2</groupHeader>
+  </group>
+</list>

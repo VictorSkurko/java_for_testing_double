@@ -33,7 +33,7 @@ public class ContactDeletedTest extends TestBase {
                             .withMiddleName("A")
                             .withLastName("A")
                             .withNickName("A")
-                            .withGroup("A")), true);
+                            .withGroup("NewI")), true);
         }
     }
 

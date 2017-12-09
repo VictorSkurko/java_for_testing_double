@@ -95,5 +95,4 @@ public class GroupCreationTest extends TestBase {
         Groups after = app.group().all();
         //Используем Hamcrest
         assertThat(after, equalTo(before));
-    }
-}
+    }}

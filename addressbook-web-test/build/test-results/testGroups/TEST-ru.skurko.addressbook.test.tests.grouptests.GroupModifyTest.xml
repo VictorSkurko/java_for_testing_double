@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.skurko.addressbook.test.tests.grouptests.GroupModifyTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-12-10T07:35:26" hostname="DESKTOP-KULL8M6" time="0.99">
+  <properties/>
+  <testcase name="testGroupModify" classname="ru.skurko.addressbook.test.tests.grouptests.GroupModifyTest" time="0.99"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

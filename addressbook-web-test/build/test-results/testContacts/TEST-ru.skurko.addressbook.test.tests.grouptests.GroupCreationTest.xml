@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.skurko.addressbook.test.tests.grouptests.GroupCreationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-12-10T07:31:16" hostname="DESKTOP-KULL8M6" time="2.884">
+  <properties/>
+  <testcase name="testGroupCreation[0](GroupData{id='2147483647', groupName='groupName 0'})" classname="ru.skurko.addressbook.test.tests.grouptests.GroupCreationTest" time="1.019"/>
+  <testcase name="testGroupCreation[1](GroupData{id='2147483647', groupName='groupName 1'})" classname="ru.skurko.addressbook.test.tests.grouptests.GroupCreationTest" time="0.914"/>
+  <testcase name="testGroupCreation[2](GroupData{id='2147483647', groupName='groupName 2'})" classname="ru.skurko.addressbook.test.tests.grouptests.GroupCreationTest" time="0.951"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

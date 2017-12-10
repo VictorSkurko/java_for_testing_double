@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.skurko.addressbook.test.tests.grouptests.GroupDeletedTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-12-10T07:31:20" hostname="DESKTOP-KULL8M6" time="0.442">
+  <properties/>
+  <testcase name="testGroupDeleted" classname="ru.skurko.addressbook.test.tests.grouptests.GroupDeletedTest" time="0.442"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

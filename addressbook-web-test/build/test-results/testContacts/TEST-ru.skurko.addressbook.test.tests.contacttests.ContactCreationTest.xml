@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.skurko.addressbook.test.tests.contacttests.ContactCreationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-12-10T07:34:33" hostname="DESKTOP-KULL8M6" time="8.543">
+<testsuite name="ru.skurko.addressbook.test.tests.contacttests.ContactCreationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-12-11T04:55:16" hostname="DESKTOP-KULL8M6" time="8.589">
   <properties/>
-  <testcase name="testContactCreation[0](ContactData{id='2147483647', firstname='firstname 0', lastname='lastname 0'})" classname="ru.skurko.addressbook.test.tests.contacttests.ContactCreationTest" time="2.547"/>
-  <testcase name="testContactCreation[1](ContactData{id='2147483647', firstname='firstname 1', lastname='lastname 1'})" classname="ru.skurko.addressbook.test.tests.contacttests.ContactCreationTest" time="2.63"/>
-  <testcase name="testContactCreation[2](ContactData{id='2147483647', firstname='firstname 2', lastname='lastname 2'})" classname="ru.skurko.addressbook.test.tests.contacttests.ContactCreationTest" time="2.881"/>
+  <testcase name="testContactCreation[0](ContactData{id='2147483647', firstname='firstname 0', lastname='lastname 0'})" classname="ru.skurko.addressbook.test.tests.contacttests.ContactCreationTest" time="2.556"/>
+  <testcase name="testContactCreation[1](ContactData{id='2147483647', firstname='firstname 1', lastname='lastname 1'})" classname="ru.skurko.addressbook.test.tests.contacttests.ContactCreationTest" time="2.638"/>
+  <testcase name="testContactCreation[2](ContactData{id='2147483647', firstname='firstname 2', lastname='lastname 2'})" classname="ru.skurko.addressbook.test.tests.contacttests.ContactCreationTest" time="2.93"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

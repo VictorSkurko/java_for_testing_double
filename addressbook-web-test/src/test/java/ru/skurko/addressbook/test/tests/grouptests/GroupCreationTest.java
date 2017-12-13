@@ -63,7 +63,6 @@ public class GroupCreationTest extends TestBase {
         return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
 
-
     @Test(dataProvider = "validGroupsFromJson")
 
     public void testGroupCreation(GroupData group) {
@@ -72,12 +71,12 @@ public class GroupCreationTest extends TestBase {
 
         app.goTo().groupPage();
 
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
 
         app.group().create(group);
         assertThat(app.group().count(), equalTo(before.size() + 1));
 
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
 
         //Используем Hamcrest
         assertThat(after, equalTo(before.withAdded(
@@ -103,4 +102,5 @@ public class GroupCreationTest extends TestBase {
         Groups after = app.group().all();
         //Используем Hamcrest
         assertThat(after, equalTo(before));
-    }}
+    }
+}

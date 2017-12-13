@@ -72,10 +72,16 @@ public class ContactCreationTest extends TestBase {
     @BeforeMethod
     public void ensurePreconditions(){
         //Переходим на страницу групп и проверяем наличие
-        app.goTo().groupPage();
+//        app.goTo().groupPage();
 
         //Если нет группы, то создаем
-        if (!app.group().isThereAGroup()) {
+//        if (!app.group().isThereAGroup()) {
+//            app.group().create(new GroupData().withGroupName("NewI"));
+//        }
+        app.goTo().groupPage();
+
+        //проверяем наличие группы
+        if (app.db().groups().size() == 0){
             app.group().create(new GroupData().withGroupName("NewI"));
         }
         app.goTo().contactPage();
@@ -84,7 +90,7 @@ public class ContactCreationTest extends TestBase {
     @Test (dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contact) {
 
-        Contacts before =app.contact().all();
+        Contacts before =app.db().contacts();
 //        File photo = new File("src/test/resources/images.jpg");
 //        ContactData contact =  new ContactData()
 //                .withFirstName("Василий")
@@ -107,7 +113,7 @@ public class ContactCreationTest extends TestBase {
         //Хэширование. Предпроверка размеров списков
         assertThat(app.contact().count(), equalTo(before.size()+1));
 
-        Contacts after =app.contact().all();
+        Contacts after =app.db().contacts();
 
         assertThat(after, equalTo(before.withAdded(
                 contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));

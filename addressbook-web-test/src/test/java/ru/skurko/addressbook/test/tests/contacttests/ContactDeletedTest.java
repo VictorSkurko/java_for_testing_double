@@ -18,8 +18,12 @@ public class ContactDeletedTest extends TestBase {
         //Переходим на страницу групп и проверяем наличие групп
         app.goTo().groupPage();
 
-        //Если нет группы, то создаем
-        if (!app.group().isThereAGroup()) {
+//        //Если нет группы, то создаем
+//        if (!app.group().isThereAGroup()) {
+//            app.group().create(new GroupData().withGroupName("NewI"));
+//        }
+        //проверяем наличие группы
+        if (app.db().groups().size() == 0){
             app.group().create(new GroupData().withGroupName("NewI"));
         }
 
@@ -39,7 +43,7 @@ public class ContactDeletedTest extends TestBase {
 
     @Test (enabled = true)
     public void testContactDeleted() {
-        Contacts before =app.contact().all();
+        Contacts before =app.db().contacts();
 
         ContactData deletedContact = before.iterator().next();
 
@@ -50,7 +54,7 @@ public class ContactDeletedTest extends TestBase {
         //Хэширование. Предпроверка размеров списков
         assertThat(app.contact().count(), equalTo(before.size()-1));
 
-        Contacts after =app.contact().all();
+        Contacts after =app.db().contacts();
         Assert.assertEquals(after.size(), before.size()-1);
 
         assertThat(after, equalTo(before.withOut(deletedContact)));

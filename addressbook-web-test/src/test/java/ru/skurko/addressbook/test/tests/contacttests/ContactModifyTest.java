@@ -15,19 +15,19 @@ public class ContactModifyTest extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().contactPage();
-        if (app.contact().all().size() == 0) {
+        if (app.db().contacts().size() == 0) {
             app.contact().create((new ContactData()
                     .withFirstName("A")
                     .withMiddleName("A")
                     .withLastName("A")
                     .withNickName("A")
-                    .withGroup("A")), true);
+                    .withGroup("NewI")), true);
         }
     }
 
     @Test (enabled = true)
     public void testContactModify() {
-        Contacts before =app.contact().all();
+        Contacts before =app.db().contacts();
         ContactData modifyContact = before.iterator().next();
 
         ContactData contact = new ContactData().withId(modifyContact.getId())
@@ -42,7 +42,7 @@ public class ContactModifyTest extends TestBase {
         //Хэширование. Предпроверка размеров списков
         assertThat(app.contact().count(), equalTo(before.size()));
 
-        Contacts after =app.contact().all();
+        Contacts after =app.db().contacts();
         Assert.assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.withOut(modifyContact).withAdded(contact)));
     }

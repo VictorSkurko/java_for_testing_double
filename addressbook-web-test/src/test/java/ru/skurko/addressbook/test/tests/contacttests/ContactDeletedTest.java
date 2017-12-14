@@ -7,10 +7,8 @@ import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.Contacts;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-
 public class ContactDeletedTest extends TestBase {
 
     @BeforeMethod

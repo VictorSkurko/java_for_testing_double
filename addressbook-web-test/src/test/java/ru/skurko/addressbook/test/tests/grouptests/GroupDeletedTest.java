@@ -39,5 +39,6 @@ public class GroupDeletedTest extends TestBase {
 
         Groups after = app.db().groups();
         assertThat(after, equalTo(before.withOut(deletedGroup)));
+        verifyGroupListInUi();
     }
 }

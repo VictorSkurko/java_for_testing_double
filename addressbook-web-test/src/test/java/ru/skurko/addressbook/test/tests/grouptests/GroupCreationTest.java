@@ -82,6 +82,8 @@ public class GroupCreationTest extends TestBase {
         assertThat(after, equalTo(before.withAdded(
                 group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
+        verifyGroupListInUi();
+
         logger.info("Finish testGroupCreation");
     }
 
@@ -102,5 +104,6 @@ public class GroupCreationTest extends TestBase {
         Groups after = app.group().all();
         //Используем Hamcrest
         assertThat(after, equalTo(before));
+        verifyGroupListInUi();
     }
 }

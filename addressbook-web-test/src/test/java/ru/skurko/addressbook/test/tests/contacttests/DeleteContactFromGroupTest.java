@@ -7,8 +7,8 @@ import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.Groups;
 import ru.skurko.addressbook.test.model.GroupData;
 import ru.skurko.addressbook.test.tests.TestBase;
-
 import java.util.Iterator;
+import static org.testng.Assert.assertEquals;
 
 public class DeleteContactFromGroupTest extends TestBase {
     @BeforeMethod
@@ -65,12 +65,16 @@ public class DeleteContactFromGroupTest extends TestBase {
             app.contact().addToGroup(contact, group);
         }
         app.goTo().contactPage();
+
         app.contact().removeFromGroup(contact, group);
+
         ContactData finalContact = contact;
-        ContactData contactFromDb = app.db().contacts().stream()
+
+        ContactData contactFromDb = app.db()
+                .contacts().stream()
                 .filter(c -> c.getId() == finalContact.getId())
                 .findFirst().orElse(null);
-        assertEquals(false, contactFromDb.getGroups().contains(group));
 
+        assertEquals(false, contactFromDb.getGroups().contains(group));
     }
 }

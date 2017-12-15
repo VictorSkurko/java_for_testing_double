@@ -35,7 +35,7 @@ public class ContactAddressTest extends TestBase {
                     .withLastName("Чапаев")
                     .withNickName("VI")
                     .withAddress("Россия, Ростов-на-Дону")
-                    .withGroup("NewI")
+//                    .withGroup("NewI")
                     .withHomePhone("+8 8635 25 00 00")
                     .withMobilePhone("+7 900 777 7777")
                     .withWorkPhone("+8 811 666 6666")

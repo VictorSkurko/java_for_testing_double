@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.Contacts;
+import ru.skurko.addressbook.test.model.GroupData;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -51,7 +52,7 @@ public class ContactHelper extends HelperBase {
 
         // если это форма создания то creation будет true и выбираем:
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+//            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -112,7 +113,7 @@ public class ContactHelper extends HelperBase {
                     .withMiddleName(null)
                     .withLastName(lastname)
                     .withNickName(null)
-                    .withGroup("NewI")
+//                    .withGroup("NewI")
                     .withAllPhones(allPhones)
                     .withAllEmail(allEmail));
         }
@@ -145,5 +146,19 @@ public class ContactHelper extends HelperBase {
                 .withEmail(email)
                 .withEmail2(email2)
                 .withEmail3(email3);
+    }
+
+    public void create(ContactData contact) {
+        initContactForm();
+        fillContactForm(contact, true);
+        submitContactForm();
+        contactCache = null;
+    }
+
+    public void addToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        new Select(wd.findElement(By.name("to_group"))).
+                selectByValue(String.valueOf(group.getId()));
+        click(By.name("add"));
     }
 }

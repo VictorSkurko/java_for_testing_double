@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import ru.skurko.addressbook.test.model.ContactData;
 import ru.skurko.addressbook.test.model.Contacts;
 import ru.skurko.addressbook.test.model.GroupData;
+import ru.skurko.addressbook.test.model.Groups;
 import ru.skurko.addressbook.test.tests.TestBase;
 
 
@@ -89,7 +90,6 @@ public class ContactCreationTest extends TestBase {
 
     @Test (dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contact) {
-
         Contacts before =app.db().contacts();
 //        File photo = new File("src/test/resources/images.jpg");
 //        ContactData contact =  new ContactData()

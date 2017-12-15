@@ -58,7 +58,7 @@ public class ContactDataGenerator {
                     .withMiddleName(String.format("middlename %s", i))
                     .withLastName(String.format("lastname %s", i))
                     .withNickName(String.format("nickname %s", i))
-                    .withGroup("NewI")
+//                    .withGroup("NewI")
                     .withAddress(String.format("address %s", i))
                     .withHomePhone(String.format("homePhone %s", i))
                     .withMobilePhone(String.format("mobilePhone %s", i))

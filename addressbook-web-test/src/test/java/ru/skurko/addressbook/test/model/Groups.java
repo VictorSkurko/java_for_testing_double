@@ -2,6 +2,7 @@ package ru.skurko.addressbook.test.model;
 
 import com.google.common.collect.ForwardingSet;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,6 +24,9 @@ public class Groups extends ForwardingSet<GroupData> {
         this.delegate = new HashSet<GroupData>(groups);
     }
 
+    public Groups(Collection<GroupData> groups) {
+        this.delegate = new HashSet<GroupData>(groups);
+    }
 
     @Override
     protected Set<GroupData> delegate() {

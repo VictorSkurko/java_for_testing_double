@@ -34,8 +34,9 @@ public class ContactDeletedTest extends TestBase {
                             .withFirstName("A")
                             .withMiddleName("A")
                             .withLastName("A")
-                            .withNickName("A")
-                            .withGroup("NewI")), true);
+                            .withNickName("A")),
+//                            .withGroup("NewI")),
+                    true);
         }
     }
 

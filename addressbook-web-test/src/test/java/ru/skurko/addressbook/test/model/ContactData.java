@@ -6,7 +6,9 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -28,9 +30,17 @@ public class ContactData {
     @Expose
     @Column(name = "nickname")
     private String nickname;
-    @Expose
-    @Transient //Пропускаем поле
-    private String group;
+
+//    @Expose
+//    @Transient //Пропускаем поле
+//    private String group;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
+
     @Expose
     @Column(name = "address")
     @Type(type = "text")
@@ -66,9 +76,14 @@ public class ContactData {
     @Transient //Пропускаем поле
     private File photo;
 
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
     public File getPhoto() {
         return photo;
     }
+
     public ContactData withPhoto(File photo) {
         this.photo = photo;
         return this;
@@ -119,7 +134,6 @@ public class ContactData {
         return this;
     }
 
-
     public String getAllPhones() {
         return allPhones;
     }
@@ -128,7 +142,6 @@ public class ContactData {
         this.allPhones = allPhones;
         return this;
     }
-
 
     public String getHomePhone() {
         return homePhone;
@@ -182,10 +195,10 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withGroup(String group) {
-        this.group = group;
-        return this;
-    }
+//    public ContactData withGroup(String group) {
+//        this.group = group;
+//        return this;
+//    }
 
     public int getId() {
         return id;
@@ -207,9 +220,9 @@ public class ContactData {
         return nickname;
     }
 
-    public String getGroup() {
-        return group;
-    }
+//    public String getGroup() {
+////        return group;
+////    }
 
     @Override
     public String toString() {

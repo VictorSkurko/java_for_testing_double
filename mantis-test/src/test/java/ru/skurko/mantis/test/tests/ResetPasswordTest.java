@@ -30,7 +30,7 @@ public class ResetPasswordTest extends TestBase {
                 .findFirst().orElse(null);
         Assert.assertNotNull(user);
         app.reset().resetPassword(user.getId());
-        List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
+        List<MailMessage> mailMessages = app.mail().waitForMail(2, 60000);
         String passwordResetLink = findPasswordResetLink(mailMessages, user.getEmail());
         String password = UUID.randomUUID().toString();
         app.reset().finish(passwordResetLink, password);
@@ -39,8 +39,15 @@ public class ResetPasswordTest extends TestBase {
     }
 
     private String findPasswordResetLink(List<MailMessage> mailMessages, String email) {
-        MailMessage mailMessage = mailMessages.stream().filter((m) -> m.getTo().equals(email)).findFirst().get();
-        VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
+        MailMessage mailMessage = mailMessages
+                .stream()
+                .filter((m) -> m.getTo().equals(email))
+                .findFirst().get();
+        VerbalExpression regex = VerbalExpression.regex()
+                .find("http://")
+                .nonSpace()
+                .oneOrMore()
+                .build();
         return regex.getText(mailMessage.getText());
     }
 

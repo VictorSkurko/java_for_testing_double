@@ -16,11 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
     private final Properties properties;
-
-    //Здесь FirefoxDriver заменен на WebDriver т.к. это интерфейс с описанием
-    // драйверов для различных браузеров. Теперь wd может принимать различные
-    // типы драйверов для различных браузеров
-
     WebDriver wd;
     private String browser;
 

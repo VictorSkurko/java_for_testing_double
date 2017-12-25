@@ -1,5 +1,4 @@
 package ru.skurko.mantis.test.appmanager;
-
 import org.apache.commons.net.telnet.TelnetClient;
 import ru.skurko.mantis.test.model.MailMessage;
 import javax.mail.*;

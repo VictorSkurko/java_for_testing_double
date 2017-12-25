@@ -1,6 +1,8 @@
 package ru.skurko.mantis.test.tests;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.skurko.mantis.test.model.MailMessage;
@@ -11,6 +13,7 @@ import static org.testng.Assert.assertTrue;
 public class RegistrationTests extends TestBase {
 
     //@BeforeMethod
+    @BeforeMethod
     public void startMailServer(){
         app.mail().start();
     }
@@ -21,6 +24,7 @@ public class RegistrationTests extends TestBase {
         String user = String.format("user%s", now);
         String password = "password";
         String email = String.format("user%s@localhost.localdomain", now);
+//        String email = String.format("user%s@localhost", now);
         app.james().createUser(user, password);
         app.registration().start(user, email);
 //        List<MailMessage> mailMessages = app.mail().waitForMail(2, 120000);
@@ -37,6 +41,7 @@ public class RegistrationTests extends TestBase {
     }
 
     //@AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void stopMailServer() {
         app.mail().stop();
     }
